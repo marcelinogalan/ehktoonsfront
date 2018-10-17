@@ -1,0 +1,16 @@
+<link rel="import" href="../../bower_components/cells-generic-dp/cells-generic-dp.html">
+
+<dom-module id="comic-dm">
+
+  <template>
+    <cells-generic-dp
+      id="comicDP"
+      host="https://any-api.com:3010"
+      path="http://xkcd.com/info.0.json"
+      method="GET"
+      on-request-success="_onRequestOk"
+      on-request-error="_onRequestError">
+    </cells-generic-dp>
+  </template>
+  <script src="comic-dm.js"></script>
+</dom-module>

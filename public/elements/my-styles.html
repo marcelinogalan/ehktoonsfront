@@ -1,0 +1,40 @@
+<dom-module id="my-styles">
+  <template>
+    <style>
+      cells-login-view {
+        --cells-login-view-login-moveup-maximized-header: {
+
+        };
+
+        --cells-login-view-login-moveup-maximized-header-bg: {
+          opacity: 1;
+          -webkit-transform: translateY(0);
+          transform: translateY(0);
+          /*transform: var(--cells-login-view-login-moveup-maximized-header-bg_-_transform, translateY(0rem));*/
+        };
+
+        --cells-login-view-login-moveup-maximized-form: {
+          -webkit-transform: translateY(0);
+          transform: translateY(0);
+        };
+
+        --cells-login-view-login-moveup-maximized-form-form: {
+          -webkit-transform: translateY(0);
+          transform: translateY(0);
+          transition: -webkit-transform 210ms cubic-bezier(0.39, 0.58, 0.57, 1);
+          transition: transform 210ms cubic-bezier(0.39, 0.58, 0.57, 1);
+          transition: transform 210ms cubic-bezier(0.39, 0.58, 0.57, 1), -webkit-transform 210ms cubic-bezier(0.39, 0.58, 0.57, 1);
+          will-change: transform;
+
+        };
+        --cells-login-view-login-moveup-maximized-form-register: {
+          opacity: 0;
+          -webkit-transform: translateX(0) translateY(0);
+          transform: translateX(0) translateY(0);
+        };
+
+      }
+
+    </style>
+  </template>
+</dom-module>

@@ -5,6 +5,12 @@
     "cells-app"
   ],
   "dependencies": {
+    "express": "4.16.2"
+  },
+  "devDependencies": {
     "cells-app-template": "^3.0.8"
+  },
+  "scripts": {
+    "test": ""
   }
 }
