@@ -1,0 +1,46 @@
+{
+  "name": "cells-template-zones-animation-behavior",
+  "version": "10.1.4",
+  "description": "behavior to manage animations",
+  "keywords": [
+    "animation",
+    "template",
+    "behavior"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#1.9 - 2"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#1 - 2",
+    "web-component-tester": "^6.0.0",
+    "cells-template-zones": "^10.0.0",
+    "cells-template-paper-header-panel": "9 - 10",
+    "cells-demo-helper": "9 - 10",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
+  },
+  "main": [
+    "cells-template-zones-animation-behavior.html",
+    "docs"
+  ],
+  "resolutions": {
+    "webcomponentsjs": "^1.0.0"
+  },
+  "variants": {
+    "1.x": {
+      "dependencies": {
+        "polymer": "Polymer/polymer#^1.9.0"
+      },
+      "devDependencies": {
+        "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+        "web-component-tester": "^4.0.0",
+        "cells-template-zones": "^10.0.0",
+        "cells-template-paper-header-panel": "9 - 10",
+        "cells-demo-helper": "^9.0.0",
+        "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7"
+      },
+      "resolutions": {
+        "webcomponentsjs": "^0.7"
+      }
+    }
+  }
+}

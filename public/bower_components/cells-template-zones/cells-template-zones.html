@@ -1,0 +1,499 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../cells-template-zones-animation-behavior/cells-template-zones-animation-behavior.html">
+<link rel="import" href="../cells-app-drawer/cells-app-drawer.html">
+<link rel="import" href="../cells-app-scroll/cells-app-scroll.html">
+<link rel="import" href="cells-template-zones-styles.html">
+
+<!--
+
+## A set of zones elements for your template. It includes:
+
+__cells-template-zones__ contains a drawer panel and a main panel. The drawer and the main panel are side-by-side with drawer on the left.
+
+  ```app__header``` - A container element for top app.
+
+  ```app__main``` - A container element main content and general manager scroll.
+
+  ```app__footer``` - A container element for bottom app.
+
+  ```app__complementary``` - A container element for drawer. [```Navigation drawer*```](https://www.google.com/design/spec/patterns/navigation-drawer.html)
+
+  ```app__overlay``` - A container element for overlay all content.
+
+  ```app__transactional``` - A container element that positions transverse layers.
+
+[__*The navigation drawer slides in from the left and contains the navigation destinations for your app.__](https://www.google.com/design/spec/patterns/navigation-drawer.html)
+
+Example cells context: *(view demo for declarative app)*
+```html
+<cells-template-zones></cells-template-zones>
+
+<cells-template-zones right-drawer drawer-width="300px"></cells-template-zones>
+```
+## Styling
+
+The following custom properties and mixins are available for styling:
+
+| Custom property | Description     | Default        |
+|:---------------|:---------------| :-------------:|
+| --app__main-padding-top | padding top scroll section | 0 |
+| --app__main-padding-bottom | padding bottom scroll section | 0 |
+| --cells-paper-scroll-header-container | {} | display: flex |
+| --app__section-zindex | z-index  .app__section | 0  |
+| --app__section-bg | background-color  .app__section | #fff  |
+| --app__header-zindex | z-index  .app__header | 0  |
+| --app__complementary-zindex | z-index  .app__complementary | 0  |
+| --app__overlay-zindex | z-index  .app__overlay | 0  |
+| --app__transactional-zindex | z-index  .app__transactional | 0  |
+| --app__complementary-width | width  .app__complamentary | 100%  |
+| --cells-template-zones | empty mixin for :host | {}  |
+| --cells-template-zones-state-active | empty mixin for :host([state="active"]) | {}  |
+| --cells-template-zones-containersection | empty mixin for .app-container, .app__section | {}  |
+| --cells-template-zones-section | empty mixin for .app__section | {}  |
+| --cells-template-zones-header | empty mixin for .app__header | {}  |
+| --cells-template-zones-relative-main | empty mixin for :host[relative-main] .app__main | {}  |
+| --cells-template-zones-main | empty mixin for .app__main | {}  |
+| --cells-template-zones-header-maincontainer | empty mixin for cells-paper-scroll-header-panel ::content #mainContainer | {}  |
+| --cells-template-zones-maincontainer | empty mixin for :host(.overflow-initial)::content #mainContainer | {}  |
+| --cells-template-zones-complementary | empty mixin for .app__complementary | {}  |
+| --cells-template-zones-overlay | empty mixin for .app__overlay | {}  |
+| --cells-template-zones-transactional | empty mixin for .app__transactional | {}  |
+
+
+@demo demo/index.html
+@hero cells-template-zones.jpg
+@composer
+@description Template with Polymer paper drawer panel
+@type template
+@platforms android, desktop, ios
+@family cells-catalog-templates-family
+-->
+<dom-module id="cells-template-zones">
+  <template>
+    <style include="cells-template-zones-styles cells-template-zones-shared-styles cells-template-zones-animation-behavior-styles"></style>
+    <cells-app-drawer id="app-container"
+      class="app-container"
+      drawer-width="[[drawerWidth]]"
+      scale-content="[[scaleContent]]"
+      force-narrow
+      disable-edge-swipe="[[disableEdgeSwipe]]"
+      edge-swipe-sensitivity="[[edgeSwipeSensitivity]]"
+      on-content-scroll="_onContentScroll"
+      on-selected-changed="_onSelectedChanged"
+      peeking="{{peeking}}"
+      dragging="{{dragging}}">
+
+      <cells-app-scroll slot="main"
+        main
+        id="app__section"
+        fixed="[[headerFixed]]"
+        class="app__section"
+        configurations-number="[[configurationsNumber]]">
+
+        <div slot="header-content"
+          class="paper-header">
+          <div>
+            <header class="app__header"
+              id="app__header"
+              hidden$="[[headerHidden]]">
+              <slot name="app__header"></slot>
+            </header>
+          </div>
+        </div>
+        <div slot="main-content"
+          class="static-zones"
+          id="staticZones">
+          <div class="app__main app__main1"
+            app-scroller-container
+            id="app__main">
+            <slot name="app__main"></slot>
+          </div>
+          <div class="app__main app__main2"
+            app-scroller-container
+            id="app__main2">
+            <slot name="app__main2"></slot>
+          </div>
+        </div>
+      </cells-app-scroll>
+
+      <div slot="footer"
+        footer
+        class="app__footer"
+        id="app__footer">
+        <slot name="app__footer"></slot>
+      </div>
+
+      <aside slot="drawer"
+        drawer
+        id="app__complementary"
+        class="app__complementary">
+        <slot name="app__complementary"></slot>
+      </aside>
+    </cells-app-drawer>
+
+    <div class="app__overlay"
+      id="app__overlay">
+      <slot name="app__overlay"></slot>
+    </div>
+    <div class="app__transactional"
+      id="app__transactional">
+      <slot name="app__transactional"></slot>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+
+      /**
+       * @event template-content-scroll
+       * Fired when the content has been scrolled.
+       */
+
+      is: 'cells-template-zones',
+      hostAttributes: {
+        'data-template': true
+      },
+
+      behaviors: [
+        window.CellsBehaviors.TemplateZonesAnimationBehavior
+      ],
+
+      properties: {
+
+        /**
+         * If true, swipe to open/close the drawer is disabled.
+         * Default:false
+         */
+        disableEdgeSwipe: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
+         * If true, main content animation scale.
+         * Default:false
+         */
+        scaleContent: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
+         * Width of the drawer panel.
+         */
+        drawerWidth: {
+          type: String
+        },
+
+        /**
+         * Hides the header.
+         */
+        headerHidden: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
+         * How many pixels on the side of the screen are sensitive to edge swipes and peek.
+         */
+        edgeSwipeSensitivity: {
+          type: Number,
+          value: 20
+        },
+
+        /**
+         * Choose add css attribute position:relative in main content ('false', or 'true').
+         * Default:false
+         */
+        relativeMain: {
+          type: Boolean,
+          value: false,
+          reflectToAttribute: true
+        },
+
+        /**
+         * If true, the header is fixed to the top and never moves away.
+         */
+        headerFixed: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
+         * If true, the footer is fixed to the bottom and never moves away.
+         */
+        footerFixed: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
+         * Component responsible for managing the scroll of their children
+         */
+        scrollerControl: {
+          type: String,
+          value: 'cells-app-scroll'
+        },
+
+        /**
+         * Footer height in px.
+         * Can be set either by using a custom CSS property (--app__footer-height) or by setting
+         * footerHeight. Default value for --app__footer-height is 60px.
+         */
+        footerHeight: {
+          type: Number,
+          observer: '_updateFooterHeight'
+        },
+
+        /**
+         * Set to true if the template has footer.
+         */
+        hasFooter: {
+          type: Boolean,
+          value: false,
+          reflectToAttribute: true
+        },
+
+        /**
+         * Selected panel: 'drawer' or 'main'.
+         */
+        selected: {
+          type: String,
+          value: 'main',
+          notify: true,
+          readOnly: true
+        },
+
+        /**
+         * Remove header height.
+         */
+        floatingHeader: {
+          type: Boolean,
+          reflectToAttribute: true,
+          value: false
+        },
+
+        /**
+         * Notifies if the menu is opened or not.
+         */
+        menuOpened: {
+          type: Boolean,
+          value: false,
+          notify: true,
+          readOnly: true,
+          reflectToAttribute: true
+        },
+
+        /**
+         * Sets wheter to disable scrolling when the menu is opened.
+         */
+        disableScrollLock: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
+         * Notifies number of configurations items
+         */
+        configurationsNumber: {
+          type: Number,
+          value: 0,
+          notify: true
+        },
+
+        /**
+         * Notifies that configurations must show
+         */
+        showConfigurations: {
+          type: Boolean
+        },
+
+        /**
+         * Binds cells-sidebar-wow-panel's peeking property
+         * @type {Boolean}
+         */
+        peeking: {
+          type: Boolean,
+          notify: true
+        },
+
+        /**
+         * Binds cells-sidebar-wow-panel's dragging property
+         * @type {Boolean}
+         */
+        dragging: {
+          type: Boolean,
+          notify: true
+        },
+
+        /**
+         * Sets a scroll margin bottom. By default 5
+         * @type {Number}
+         */
+        scrollBottomMarginError: {
+          type: Number,
+          value: 5
+        },
+
+        /**
+         *Sets if _isScrolledToBottom has been launched
+         * for the first time
+         */
+        isScrollInit: {
+          type: Boolean,
+          value: false
+        }
+      },
+
+      listeners: {
+        'overlay-opening': '_removeOverflow',
+        'overlay-closed': '_addOverflow',
+        'toggle-menu': 'toggleMenu',
+        'state-no-visible': '_resetLayerScroll',
+        'change-template-animation': '_onChangeAnimation'
+      },
+
+      observers: [
+        '_setupFooter(hasFooter, footerFixed)'
+      ],
+
+      /**
+       * toggle menu
+       */
+      toggleMenu: function() {
+        const menu = Polymer.dom(this.root).querySelector('#app-container');
+        if (menu) {
+          menu.togglePanel();
+        }
+      },
+
+      /**
+       * Sets configurations number
+       * @param {Number}
+       */
+      checkConfigurationsNumber: function(configurations) {
+        this.set('configurationsNumber', configurations);
+      },
+
+      /**
+       * @event set-scroll-bottom-event
+       * Fires event when scroll is bottom
+       * @param {Event} scroll event
+       */
+      _isScrolledToBottom: function(ev) {
+        this.set('isScrollInit', true);
+        var scrolledHeight = ev.detail.target.scrollHeight - ev.detail.target.scrollTop;
+        var clientHeight = ev.detail.target.clientHeight;
+        if (scrolledHeight <= (clientHeight + this.scrollBottomMarginError)) {
+          this.dispatchEvent(new Event('set-scroll-bottom-event', {
+            bubbles: true,
+            composed: true
+          }));
+        }
+      },
+
+      _onSelectedChanged: function(e) {
+        this._setSelected(e.detail.value);
+
+        if (e.detail.value === 'drawer') {
+          this._setMenuOpened(true);
+          if (!this.disableScrollLock) {
+            this._removeOverflow();
+          }
+        } else {
+          this._setMenuOpened(false);
+          if (!this.disableScrollLock) {
+            this._addOverflow();
+          }
+        }
+      },
+
+      /**
+       * Add scroll bar
+       */
+      _addOverflow: function() {
+        this.classList.remove('overflow-initial');
+      },
+
+      /**
+       * Remove scroll bar
+       */
+      _removeOverflow: function() {
+        this.classList.add('custom-transition');
+        this.classList.add('overflow-initial');
+      },
+
+      /**
+       * Move scroll to 0
+       */
+      _resetLayerScroll: function() {
+        Polymer.RenderStatus.afterNextRender(this, function() {
+          this.set('isScrollInit', false);
+        });
+      },
+
+      _onChangeAnimation: function(ev) {
+        ev.stopPropagation();
+        this.animationType = ev.detail.animationType;
+      },
+
+      /**
+       * @event template-content-scroll
+       * Fires event on change scroll
+       * calls _isScrolledToBottom  method to calculate
+       * scroll position
+       * launched directly the first time
+       * the following times function will be launched
+       * after 100 milliseconds
+       * @param {Event} scroll event
+       */
+      _onContentScroll: function(ev) {
+        ev.stopPropagation();
+        if (this.isScrollInit) {
+          this.debounce('on-change-scroll', function() {
+            this._isScrolledToBottom(ev);
+            this.dispatchEvent(new CustomEvent('template-content-scroll', {
+              bubbles: true,
+              composed: true,
+              detail: {
+                scrollTop: ev.detail.positionScroll,
+                target: ev.detail.target
+              }
+            }));
+
+          }, 100);
+        } else {
+          this._isScrolledToBottom(ev);
+        }
+      },
+
+      _updateFooterHeight: function(footerHeight) {
+        if (footerHeight) {
+          this.customStyle['--app__footer-height'] = footerHeight + 'px';
+          this.updateStyles();
+        }
+      },
+
+      _setupFooter: function(hasFooter, footerFixed) {
+        if (!hasFooter) {
+          this.unlisten(this.$.app__section, 'cells-app-scroll-transform', '_onHeaderTransform');
+          return;
+        }
+
+        if (!footerFixed) {
+          this.listen(this.$.app__section, 'cells-app-scroll-transform', '_onHeaderTransform');
+        } else {
+          this.unlisten(this.$.app__section, 'cells-app-scroll-transform', '_onHeaderTransform');
+        }
+
+        this.classList.toggle('footer-fixed', footerFixed);
+      },
+
+      _onHeaderTransform: function(e) {
+        this._footer = this._footer || this.$.app__footer;
+        this.transform('translate3d(0, ' + Math.abs(e.detail.y) + 'px, 0)', this._footer);
+      }
+
+    });
+  </script>
+</dom-module>

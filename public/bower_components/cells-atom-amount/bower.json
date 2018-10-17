@@ -1,0 +1,58 @@
+{
+  "name": "cells-atom-amount",
+  "version": "10.1.5",
+  "description": "It formats a number into different combinations of sizes and alignments according to currency codes",
+  "keywords": [
+    "formats",
+    "atom",
+    "amount",
+    "number",
+    "currency"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#1.9 - 2",
+    "cells-amount-behavior": "^10.0.0",
+    "cells-i18n-behavior": "^10.0.0"
+  },
+  "main": [
+    "cells-atom-amount.html"
+  ],
+  "devDependencies": {
+    "banking-icons": "^10.0.0",
+    "cells-sass": "^2.0.0",
+    "iron-test-helpers": "PolymerElements/iron-test-helpers#1 - 2",
+    "iron-component-page": "PolymerElements/iron-component-page#1 - 2",
+    "web-component-tester": "#^6.0.0",
+    "cells-demo-helper": "^10.0.0",
+    "coronita-icons": "^10.0.0",
+    "cells-coronita-theme": "^11.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
+  },
+  "resolutions": {
+    "webcomponentsjs": "^1.0.0"
+  },
+  "variants": {
+    "1.x": {
+      "dependencies": {
+        "polymer": "Polymer/polymer#^2.0.0",
+        "cells-amount-behavior": "^10.0.0",
+        "cells-i18n-behavior": "^10.0.0"
+      },
+      "devDependencies": {
+        "banking-icons": "^10.0.0",
+        "cells-sass": "^2.0.0",
+        "iron-test-helpers": "PolymerElements/iron-test-helpers#1 - 2",
+        "iron-component-page": "PolymerElements/iron-component-page#1 - 2",
+        "web-component-tester": "#^4.0.0",
+        "cells-demo-helper": "^10.0.0",
+        "coronita-icons": "^10.0.0",
+        "cells-coronita-theme": "^11.0.0",
+        "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7"
+
+      },
+      "resolutions": {
+        "webcomponentsjs": "^0.7"
+      }
+    }
+  }
+}

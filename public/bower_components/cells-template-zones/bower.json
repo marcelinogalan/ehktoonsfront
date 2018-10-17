@@ -1,0 +1,76 @@
+{
+  "name": "cells-template-zones",
+  "version": "10.0.6",
+  "description": "Cells Template Scroll Header Panel",
+  "keywords": [
+    "template",
+    "cells-app-drawer",
+    "cells-app-scroll",
+    "one column",
+    "animation-behavior",
+    "polymer",
+    "spec"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#1.9 - 2",
+    "cells-app-drawer": "9 - 10",
+    "cells-app-scroll": "9 - 10",
+    "cells-template-zones-animation-behavior": "9 - 10"
+  },
+  "main": "cells-template-zones.html",
+  "composer": {
+    "description": "Template with Polymer paper drawer panel",
+    "preview": "cells-template-zones.jpg",
+    "type": "template",
+    "platforms": "android, ios, desktop",
+    "family": "cells-catalog-templates-family"
+  },
+  "devDependencies": {
+    "cells-sass": "~2.0.0",
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0",
+    "iron-component-page": "PolymerElements/iron-component-page#1 - 2",
+    "cells-demo-helper": "9 - 10",
+    "cells-coronita-theme": "^11.0.0",
+    "cells-component-app-header": "9 - 10",
+    "cells-organism-menu-sidebar": "9 - 10",
+    "cells-product-item-list": "9 - 10",
+    "cells-login-view": "^11.0.0",
+    "coronita-icons": "9 - 10",
+    "cells-operations-list": "9 - 10",
+    "cells-navigation-bar": "9 - 10",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
+  },
+  "resolutions": {
+    "webcomponentsjs": "^1.0.0",
+    "iron-input": "^2.0.0"
+  },
+  "variants": {
+    "1.x": {
+      "dependencies": {
+        "polymer": "Polymer/polymer#^1.9.0",
+        "cells-app-drawer": "^9.0.0",
+        "cells-app-scroll": "^9.0.0",
+        "cells-template-zones-animation-behavior": "^9.0.0"
+      },
+      "devDependencies": {
+        "cells-sass": "~2.0.0",
+        "web-component-tester": "Polymer/web-component-tester#^4.0.0",
+        "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+        "cells-demo-helper": "#^9.0.0",
+        "cells-coronita-theme": "^9.0.0",
+        "cells-component-app-header": "^9.0.0",
+        "cells-organism-menu-sidebar": "^9.0.0",
+        "cells-product-item-list": "^9.0.0",
+        "cells-login-view": "^9.0.0",
+        "coronita-icons": "^9.0.0",
+        "cells-operations-list": "^9.0.0",
+        "cells-navigation-bar": "^9.0.0",
+        "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7"
+      },
+      "resolutions": {
+        "webcomponentsjs": "^0.7",
+        "iron-input": "^1.0.0"
+      }
+    }
+  }
+}

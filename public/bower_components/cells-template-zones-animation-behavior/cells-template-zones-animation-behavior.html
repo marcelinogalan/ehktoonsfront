@@ -1,0 +1,416 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="cells-template-zones-animation-behavior-styles.html">
+<script>
+  /*global WeakMap*/
+
+  /**
+     * `Polymer.CellsTemplateZonesAnimationBehavior` is a behavior to manage animations
+     *
+     * 1) Import the behavior in your component.
+     *
+     * ```html
+     * <link rel="import" href="../cells-template-zones-animation-behavior/cells-template-zones-animation-behavior.html">
+     * ```
+     *
+     * 2) Add Polymer.CellsTemplateZonesAnimationBehavior to the behaviors list in the JS file or script of your component:
+     *
+     * 3) Add cells-template-zones-animation-behavior-styles in tag style.
+     *
+     *```html
+     * <style include="name-your-component-styles cells-template-zones-animation-behavior-styles"></style>
+     * ```
+     * @polymerBehavior Polymer.CellsTemplateZonesAnimationBehavior
+     *
+     * @demo demo/index.html
+     * @hero cells-template-zones-animation-behavior.jpg
+   */
+  window.CellsBehaviors = window.CellsBehaviors || {};
+  window.CellsBehaviors.TemplateZonesAnimationBehavior = {
+
+    /**
+     * Fired when template/zone is no visible.
+     *
+     * @event 'state-no-visible'
+     */
+
+    /**
+     * Fired when template animation ends.
+     *
+     * @event this.animationCompleteEvent ('default value: template-active')
+     */
+
+    properties: {
+
+      /**
+       * @type {DOM node}
+       */
+      _templateA: {
+        type: Object
+      },
+
+      /**
+       * @type {Boolean}
+       */
+      _isZone: {
+        type: Boolean
+      },
+
+      /**
+       * @type {String}
+       */
+      name: {
+        type: String
+      },
+
+      /**
+       * @type {Number}
+       */
+      distance: {
+        type: Number
+      },
+
+      /**
+       * Can be 'cached', 'inactive', 'active'
+       * @type {String}
+       */
+      state: {
+        type: String,
+        observer: '_stateChanged'
+      },
+      /**
+       *
+       * @type {String}
+       */
+      animationCompleteEvent: {
+        type: String,
+        value: 'template-active'
+      },
+      /**
+       * Can be 'horizontal', 'verticalDownForwards', 'verticalDownBackwards', 'verticalUp'
+       * @type {String}
+       */
+      animationType: {
+        type: String,
+        value: 'horizontal',
+        notify: true
+      },
+
+      _nativeNavigation: {
+        type: Boolean
+      },
+
+      /**
+       * An object that configurates the animation name .class type for horizontal direction
+       */
+      horizontal: {
+        type: Object,
+        value: {
+          forwardsIn: 'template-animation-moveFromRight',
+          forwardsOut: 'template-animation-moveToLeft',
+          backwardsIn: 'template-animation-moveFromLeft',
+          backwardsOut: 'template-animation-moveToRight'
+        }
+      },
+
+      /**
+       * An object that configurates the animation name .class type for horizontal ever direction when both pages are sibling and the second
+       page should not behave as the main  */
+      horizontalEverFor: {
+        type: Object,
+        value: {
+          forwardsIn: 'template-animation-moveFromRight',
+          forwardsOut: 'template-animation-moveToLeft',
+          backwardsIn: 'template-animation-moveFromRight',
+          backwardsOut: 'template-animation-moveToLeft'
+        }
+      },
+
+      /**
+       * An object that configurates the animation name .class type for horizontal ever direction when both pages are sibling and the second
+       page should not behave as the main
+       */
+      horizontalEverBack: {
+        type: Object,
+        value: {
+          forwardsIn: 'template-animation-moveFromLeft',
+          forwardsOut: 'template-animation-moveToRight',
+          backwardsIn: 'template-animation-moveFromLeft',
+          backwardsOut: 'template-animation-moveToRight'
+        }
+      },
+
+      /**
+       * An object that configurates the animation name .class type for vertical down forwards direction
+       */
+      verticalDownForwards: {
+        type: Object,
+        value: {
+          forwardsIn: 'template-animation-static',
+          forwardsOut: 'template-animation-moveToBottom',
+          backwardsIn: 'template-animation-moveFromLeft',
+          backwardsOut: 'template-animation-moveToRight'
+        }
+      },
+
+      /**
+       * An object that configurates the animation name .class type for vertical down backwards direction
+       */
+      verticalDownBackwards: {
+        type: Object,
+        value: {
+          forwardsIn: 'template-animation-moveFromRight',
+          forwardsOut: 'template-animation-moveToLeft',
+          backwardsIn: 'template-animation-static',
+          backwardsOut: 'template-animation-moveToBottom'
+        }
+      },
+
+      /**
+       * An object that configurates the animation name .class type for vertical up direction
+       */
+      verticalUp: {
+        type: Object,
+        value: {
+          forwardsIn: 'template-animation-moveFromBottom',
+          forwardsOut: 'template-animation-static',
+          backwardsIn: 'template-animation-static',
+          backwardsOut: 'template-animation-moveToBottom'
+        }
+      },
+
+      /**
+       * An object that configurates the animation name .class type for static
+       */
+      static: {
+        type: Object,
+        value: {
+          forwardsIn: 'template-animation-static',
+          forwardsOut: 'template-animation-static',
+          backwardsIn: 'template-animation-static',
+          backwardsOut: 'template-animation-static'
+        }
+      },
+
+      /**
+       * An object that configurates the animation name .class type for fade
+       */
+      fade: {
+        type: Object,
+        value: {
+          forwardsIn: 'template-animation-fade-in',
+          forwardsOut: 'template-animation-fade-out',
+          backwardsIn: 'template-animation-fade-in',
+          backwardsOut: 'template-animation-fade-out'
+        }
+      }
+    },
+
+    /**
+     * @method _findTemplateByState
+     * @param {string} type state in template.
+     * @return {DOM} Template.
+     */
+    _findTemplateByState: function(state) {
+      return this.parentNode.querySelector('#' + this.parentNode.id + ' > [state="' + state + '"]');
+    },
+
+    /**
+     * @method _findStateZoneByState
+     * @param {string} type state in static zones.
+     * @return {DOM} Template.
+     */
+    _findStateZoneByState: function(state) {
+      return Polymer.dom(this.root).querySelector('.static-zones [state="' + state + '"]');
+    },
+
+    /**
+     * @method _stateChanged
+     * @param newState state template ('cached', 'inactive', 'active', 'active-zones', 'native')
+     */
+    _stateChanged: function(newState) {
+
+      if (newState === 'native') {
+        this._nativeNavigation = true;
+        return;
+      } else if (this._nativeNavigation) {
+        this._nativeNavigation = false;
+        return;
+      }
+      if (newState === 'active') {
+        var inactiveTemplate = this._findTemplateByState('inactive');
+        if (inactiveTemplate) {
+          this.set('_templateA', this);
+          this.set('_isZone', false);
+          this.animateWith(inactiveTemplate);
+        } else {
+          this.classList.add('state-is-visible');
+          this.classList.remove('state-no-visible');
+          this.dispatchEvent(new Event(this.animationCompleteEvent));
+        }
+      }
+
+      if (newState === 'active-zones') {
+        var inactiveStateZone = this._findStateZoneByState('inactive');
+        if (inactiveStateZone) {
+          this.set('_templateA', Polymer.dom(this.root).querySelector('.static-zones [state="active"]'));
+          this.set('_isZone', true);
+          this.animateWith(inactiveStateZone);
+        } else {
+          this.dispatchEvent(new Event(this.animationCompleteEvent));
+        }
+      }
+
+      if (this._templateA) {
+        this._templateA.classList.remove('state-no-visible');
+      }
+
+    },
+
+    /**
+     * @method directAnimationForwards add animation name class forwards direction
+     * @param templateA template in
+     * @param templateB template out
+     * @param animationType type animation
+     */
+    directAnimationForwards: function(templateA, templateB, animationType) {
+      templateA.classList.add(animationType.forwardsIn);
+      templateB.classList.add(animationType.forwardsOut);
+    },
+
+    /**
+     * @method directAnimationBackwards add animation name class backwards direction
+     * @param templateA template in
+     * @param templateB template out
+     * @param animationType type animation
+     */
+    directAnimationBackwards: function(templateA, templateB, animationType) {
+      templateA.classList.add(animationType.backwardsIn);
+      templateB.classList.add(animationType.backwardsOut);
+    },
+
+    _configureAnimationTypeActive: function(templateB) {
+      var animationTypeIn = this.animationType;
+      var animationTypeOut = templateB.animationType;
+
+      var map = {
+        'verticalDownBackwards': 'verticalDownBackwards',
+        'verticalDownForwards': 'verticalDownForwards',
+        'verticalUp': 'verticalUp',
+        'staticEver': 'static',
+        'horizontalEver': 'horizontal',
+        'fade': 'fade'
+      };
+
+      if (animationTypeOut === animationTypeIn) {
+        [animationTypeOut, animationTypeIn].forEach(anim => {
+          if (anim in map) {
+            return this[map[anim]];
+          }
+        });
+      }
+
+      if (animationTypeIn === 'horizontalEver' && animationTypeOut === 'static') {
+        return this.horizontalEverForwards;
+      }
+
+      if (animationTypeOut === 'horizontalEver' && animationTypeIn === 'static') {
+        return this.horizontalEverBackwards;
+      }
+
+      if (map[animationTypeOut]) {
+        return this[map[animationTypeOut]];
+      }
+
+      if (map[animationTypeIn]) {
+        return this[map[animationTypeIn]];
+      }
+
+      return this.horizontal;
+    },
+
+    /**
+     * @method animateWith init animation
+     * @param templateB template out
+     */
+    animateWith: function(templateB) {
+      if (!this._templateA) {
+        return;
+      }
+      var reverse;
+      var evName;
+      var animationTypeActive;
+
+      if (this._isZone) {
+        animationTypeActive = this._configureAnimationTypeActive(this);
+      } else {
+        animationTypeActive = this._configureAnimationTypeActive(templateB);
+      }
+
+      if (this._templateA._templateN && this._templateA._templateN.get(templateB)) {
+        reverse = true;
+      } else {
+        templateB._templateN = new WeakMap();
+        templateB._templateN.set(this._templateA, true);
+        reverse = false;
+      }
+
+      evName = this.style.WebkitAnimation !== undefined ? 'webkitAnimationEnd' : 'animationend';
+
+      this.listen(this._templateA, evName, 'resetTemplate');
+      this.listen(templateB, evName, 'resetTemplate');
+
+      this.async(function() {
+        setTimeout(function() {
+          if (!reverse) {
+            //forward
+            this.directAnimationForwards(this._templateA, templateB, animationTypeActive);
+          } else {
+            //backward
+            this.directAnimationBackwards(this._templateA, templateB, animationTypeActive);
+          }
+          this._templateA.classList.add('state-is-visible');
+          this._templateA.classList.remove('state-no-visible');
+        }.bind(this), 0);
+      });
+
+    },
+
+    /**
+     * @method resetTemplate clear state animation
+     * @param evt animationend
+     */
+    resetTemplate: function(evt) {
+      var AT_TARGET = Event.AT_TARGET || Event.prototype.AT_TARGET;
+      if (evt.eventPhase !== AT_TARGET) {
+        return;
+      }
+      var node = evt.target;
+      var regClsTemplate = /\btemplate-animation\S+/g;
+      node.className = (node.className || '').replace(regClsTemplate, '');
+      this.unlisten(node, evt.type, 'resetTemplate');
+
+      if (node !== this._templateA) {
+        var templateB = node;
+        var templateBscrollerControl = Polymer.dom(templateB.root).querySelector(templateB.scrollerControl);
+        this.async(function() {
+          if (!this._isZone) {
+            if (templateBscrollerControl) {
+              templateBscrollerControl.scrollToTop(false);
+            }
+          } else {
+            templateB.scrollTop = 0; //reset position header
+          }
+
+          templateB.classList.remove('state-is-visible');
+          templateB.classList.add('state-no-visible');
+        });
+      } else {
+        this.async(function() {
+          this.dispatchEvent(new Event(this.animationCompleteEvent));
+        });
+        this.dispatchEvent(new Event('state-no-visible'));
+      }
+    }
+  };
+
+</script>

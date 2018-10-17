@@ -1,0 +1,48 @@
+@import "bower_components/cells-sass/main";
+
+:host {
+  display: block;
+  box-sizing: border-box;
+  font-family: var(--cells-fontDefault, sans-serif);
+  position: relative;
+  @apply --cells-product-item-list;
+}
+
+:host([hidden]) {
+  display:none;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.header {
+  padding: rem(15px) rem(20px);
+  @apply --cells-product-item-list-header;
+}
+
+.inline {
+  position: absolute;
+  transform: translate(-50%, 50%);
+  left: 50%;
+  top: 50%;
+  --cells-icon-message-error: unquote("{
+    @apply --cells-product-item-list-error-message;
+  }");
+}
+
+.item-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  @apply --cells-product-item-list-list;
+}
+
+.default-skeleton[visible] {
+  position: absolute;
+  top: 0;
+  height: 100vh;
+  @apply --cells-product-item-list-default-skeleton;
+}
+
+[hidden] { display: none; }

@@ -1,0 +1,106 @@
+<link rel="import" href="../cells-atom-amount/cells-atom-amount.html">
+<link rel="import" href="../cells-atom-subheader/cells-atom-subheader.html">
+<link rel="import" href="../cells-icon-message/cells-icon-message.html">
+<link rel="import" href="../cells-i18n-behavior/cells-i18n-behavior.html">
+<link rel="import" href="../cells-product-item/cells-product-item.html">
+<link rel="import" href="../cells-skeleton-loading-page/cells-skeleton-loading-page.html">
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="cells-product-item-list-styles.html">
+<!--
+`<cells-product-item-list>` displays a list of accounts or movements using `<cells-product-item>`.
+
+The skeleton or loader element can be shown by setting the boolean property `loading` to `true`.
+Also, the default skeleton component can be replaced by a custom one provided in a slot with name `loader`.
+
+Example:
+
+```html
+<cells-product-item-list></cells-product-item-list>
+```
+
+Example with a custom skeleton:
+
+```html
+<cells-product-item-list loading>
+  <custom-skeleton slot="loader"></custom-skeleton>
+</cells-product-item-list>
+```
+
+
+## Styling
+
+The following custom properties and mixins are available for styling:
+
+| Custom property | Description     | Default        |
+|:----------------|:----------------|:--------------:|
+| --cells-product-item-list  | Mixin applied to :host     | {} |
+| --cells-fontDefault  | Mixin applied to :host font-family    | sans-serif |
+| --cells-product-item-list-header  | Mixin applied to the header    | {} |
+| --cells-product-item-list-list  | Mixin applied to the list    | {} |
+| --cells-product-item-list-default-skeleton-bg-color  | background-color for the default skeleton    | #fff |
+| --cells-product-item-list-default-skeleton  | Mixin applied to the default skeleton    | {} |
+| --cells-product-item-list-error-message| Mixin applied to the default error message | {} |
+
+
+@demo demo/index.html
+@hero cells-product-item-list.png
+@composer
+@description is a list all accounts.
+@type UI
+@platforms android, ios, desktop
+@family cells-catalog-distributors-family
+-->
+<dom-module id="cells-product-item-list">
+  <template>
+    <style include="cells-product-item-list-styles cells-product-item-list-shared-styles"></style>
+
+    <slot name="loader">
+      <cells-skeleton-loading-page no-entry-animation class="default-skeleton" visible="[[loading]]" repeat="3"></cells-skeleton-loading-page>
+    </slot>
+
+    <template is="dom-if" if="[[!loading]]">
+      <template is="dom-if" if="[[error]]">
+        <div class="error-message">
+          <slot name="error-content">
+            <cells-icon-message class="inline" type="error" icon="[[errorIcon]]" icon-size="26" message="[[t(errorMessage, errorMessage)]]">
+            </cells-icon-message>
+          </slot>
+        </div>
+      </template>
+      <template is="dom-if" if="[[!error]]">
+        <cells-atom-subheader class="header" heading-level="[[headingLevel]]">
+          <span slot="heading" class="heading">[[t(header, header)]]</span>
+          <template is="dom-if" if="[[balance.amount]]">
+            <cells-atom-amount
+              amount="[[balance.amount]]"
+              scale="[[balance.scale]]"
+              currency-code="[[balance.currency]]"
+              local-currency="[[localCurrency]]">
+            </cells-atom-amount>
+          </template>
+        </cells-atom-subheader>
+
+        <ul class="item-list">
+          <template is="dom-repeat" items="[[items]]">
+            <li>
+              <cells-product-item
+                heading-level="[[_listItemHeadingLevel]]"
+                name="[[item.name]]"
+                description="[[item.description]]"
+                primary-amount="[[item.primaryAmount]]"
+                secondary-amount="[[item.secondaryAmount]]"
+                scale="[[item.scale]]"
+                visible-chars="[[visibleChars]]"
+                img-src="[[item.imgSrc]]"
+                show-img-overlay="[[showImgOverlay]]"
+                on-tap="_onItemTap">
+                <span class="description" hidden="[[!item.additionalDescription]]">[[item.additionalDescription]]</span>
+              </cells-product-item>
+            </li>
+          </template>
+      </ul>
+      </template>
+    </template>
+  </template>
+  <script src="cells-product-item-list.js"></script>
+</dom-module>

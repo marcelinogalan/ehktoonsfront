@@ -1,0 +1,99 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-a11y-keys-behavior/iron-a11y-keys-behavior.html">
+<link rel="import" href="../cells-i18n-behavior/cells-i18n-behavior.html">
+
+<link rel="import" href="cells-select-item.html">
+<link rel="import" href="cells-select-styles.html">
+
+<!--
+`<cells-select>` is a component to display a dropdown menu. It allows to select an option
+from an array of `options`.
+
+Example:
+
+```html
+<cells-select options="[[optionsArray]]"></cells-select>
+```
+
+`optionsArray` is formed by `data` Objects, that `cells-select-item` is expecting
+
+```js
+[
+  {
+    title: 'Cuenta *5894',
+    description: 5687.05,
+    currencyCode: 'USD'
+  },
+  {
+    title: 'Cuenta *4785',
+    description: 3.236,05,
+    currencyCode: ''
+  },
+  {
+    title: 'Cuenta *6734',
+    description: 10687.05
+  }
+]
+```
+
+To access to the current selected option, you can obtain the value of `selectedOption` property.
+
+If the elements of the dropdown is not fully display, you may have to add to parent element the `css` property `overflow: visible`.
+
+## Icons
+
+Since this component uses icons, it will need an [iconset](https://bbva.cellsjs.com/guides/best-practices/cells-icons.html) in your project as an [application level dependency](https://bbva.cellsjs.com/guides/advanced-guides/application-level-dependencies.html). In fact, this component uses an iconset in its demo.
+
+## Styling
+
+The following custom properties and mixins are available for styling:
+
+| Custom property                           | Description                              | Default                          |
+|:------------------------------------------|:-----------------------------------------| :-------------------------------:|
+| --cells-fontDefault                       | Font family for :host                    | sans-serif                       |
+| --cells-select                            | Mixin applied to :host                   | {}                               |
+| --cells-select-color                      | Color of :host                           | var(--bbva-600, #121212)         |
+| --cells-select-bg-color                   | Background color of :host                | var(--bbva-100, #F4F4F4)         |
+| --cells-select-opened                     | Mixin applied to opened :host            | {}                               |
+| --cells-select-header                     | Mixin applied to .header                 | {}                               |
+| --cells-select-header-icon                | Mixin applied to .header's icon          | {}                               |
+| --cells-select-header-icon-color          | Color of .header's icon                  | var(--bbva-medium-blue, #2A86CA) |
+| --cells-select-headertexts                | Mixin applied to texts in header         | {}                               |
+| --cells-select-label                      | Mixin applied to label                   | {}                               |
+| --cells-select-label-color                | Color of label                           | var(--bbva-500, #666)            |
+| --cells-select-placeholder                | Mixin applied to placeholder             | {}                               |
+| --cells-select-placeholder-color          | Color of placeholder                     | var(--bbva-600, #121212)         |
+| --cells-select-options                    | Mixin applied to .options                | {}                               |
+| --cells-select-options-item               | Mixin applied to .options-item           | {}                               |
+| --cells-select-disabled                   | Mixin applied to disabled :host          | {}                               |
+| --cells-select-disabled-header-color      | Color of disabled :host's header         | var(--bbva-500, #666)            |
+| --cells-select-disabled-header            | Mixin applied to disabled :host's header | {}                               |
+| --cells-select-disabled-header-icon-color | Color of disabled :host's header's icon  | var(--bbva-400, #bdbdbd)         |
+| --cells-select-opened-options             | Mixin applied to the list when the select is opened  | {}                     |
+
+@demo demo/index.html
+@hero cells-select.png
+-->
+<dom-module id="cells-select">
+  <template>
+    <style include="cells-select-styles cells-select-shared-styles"></style>
+    <div id="select_header" class="header" on-click="toggle">
+      <div class="header-texts">
+        <span id="label" class="label">[[t(label)]]</span>
+        <span class="placeholder" hidden$="[[!_placeholder]]">[[t(placeholder)]]</span>
+        <template is="dom-if" if="[[!_placeholder]]">
+          <li is="cells-select-item" id="selectHeaderItem" hidden$="[[_isPolymerElement]]" class="placeholder" data="[[selectedOption]]" tabindex="-1"></li>
+          <cells-select-item id="selectHeaderItem" hidden$="[[!_isPolymerElement]]" class="placeholder" data="[[selectedOption]]" tabindex="-1"></cells-select-item>
+        </template>
+      </div>
+      <iron-icon id="icon" icon="[[rightIcon]]" class="header__icon"></iron-icon>
+    </div>
+    <ul id="select_options" class="options" hidden$="[[!opened]]" role="listbox">
+      <template is="dom-repeat" items="[[options]]">
+        <li is="cells-select-item" data="[[item]]" class$="options__item [[item.css]]" hidden$="[[_isPolymerElement]]"></li>
+        <cells-select-item data="[[item]]" class$="options__item [[item.css]]" hidden$="[[!_isPolymerElement]]"></cells-select-item>
+      </template>
+    </ul>
+  </template>
+  <script src="cells-select.js"></script>
+</dom-module>

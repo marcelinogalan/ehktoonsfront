@@ -1,0 +1,119 @@
+@import "bower_components/cells-sass/main";
+
+:host {
+	display: block;
+	position: relative;
+	font-family: var(--cells-fontDefault, sans-serif);
+	box-sizing: border-box;
+	border-radius: 1px;
+	color: var(--cells-select-color, var(--bbva-600, #121212));
+	background-color: var(--cells-select-bg-color, var(--bbva-100, #F4F4F4));
+	@apply --cells-select;
+}
+
+/**
+ * Empty mixins to set outline for :focus and :active states.
+ * These mixins are meant to be set in an application's theme.
+ * --cells-global-focus, --cells-global-active
+ */
+@each $state in ('focus', 'active') {
+  :host(:#{$state}) {
+    @apply --cells-global-#{$state};
+  }
+}
+
+:host([opened]) {
+	@apply --cells-select-opened;
+}
+
+:host([disabled]) {
+	@apply --cells-select-disabled;
+
+  .header {
+    opacity: 0.5;
+    cursor: default;
+		color: var(--cells-select-disabled-header-color, var(--bbva-500, #666));
+    @apply --cells-select-disabled-header;
+
+		&__icon {
+			color: var(--cells-select-disabled-header-icon-color, var(--bbva-400, #bdbdbd));
+		}
+  }
+}
+
+:host([hidden]), [hidden] {
+	display: none !important;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+p { margin: 0; }
+
+.header {
+	display: flex;
+	align-items: center;
+	line-height: rem(36px);
+	height: rem(60px);
+	padding: 0 rem(20px);
+	border-radius: 1px;
+	cursor: pointer;
+	@apply --cells-select-header;
+
+	&__icon {
+		width: 2.6rem;
+		height: 100%;
+		color: var(--cells-select-header-icon-color, var(--bbva-medium-blue, #2A86CA));
+		@apply --cells-select-header-icon;
+	}
+}
+
+.header-texts {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	@apply --cells-select-headertexts;
+}
+
+.label {
+	margin-bottom: 5px;
+	font-size: rem(12px);
+	line-height: rem(12px);
+	color: var(--cells-select-label-color, var(--bbva-500, #666));
+	@apply --cells-select-label;
+}
+
+.placeholder {
+	width: 100%;
+	margin: 0;
+	font-size: rem(16px);
+	line-height: rem(16px);
+	text-align: left;
+	color: var(--cells-select-placeholder-color,var(--bbva-600, #121212));
+	@apply --cells-select-placeholder;
+}
+
+.options {
+	width: 100%;
+  max-height: rem(200px);
+  position: absolute;
+	flex-direction: column;
+	margin: 0;
+	padding: 0;
+	overflow-y: auto;
+	z-index: 1;
+	cursor: pointer;
+	font-size: rem(16px);
+  line-height: 4rem;
+  background-color: inherit;
+	@apply --cells-select-options;
+	&__item {
+		@apply --cells-select-options-item;
+  }
+}
+
+:host([opened]) .options {
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+  @apply --cells-select-opened-options;
+}

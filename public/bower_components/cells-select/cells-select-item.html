@@ -1,0 +1,90 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../cells-atom-amount/cells-atom-amount.html">
+<link rel="import" href="../iron-a11y-keys-behavior/iron-a11y-keys-behavior.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="cells-select-item-styles.html">
+
+<!--
+`<cells-select-item>` prints an item with a left title and an optional right description,
+ which it can be a Number or text.
+
+Expects a `data` object with the following format, `description` and `currencyCode` params are optional.
+They are to be drawn on the option's right.
+
+```json
+{
+  title: "Account *1234",
+  description: "Personal"
+}
+```
+
+If `description` is a Number, the `currencyCode` is also expected
+
+```json
+{
+  title: "Account *1234",
+  description: 3527.11,
+  currencyCode: "USD"
+}
+```
+
+Example:
+
+    <cells-select-item data="[[item]]"></cells-select-item>
+
+## Styling
+
+The following custom properties and mixins are available for styling:
+
+| Custom property                                        | Description                                     | Default                  |
+|:-------------------------------------------------------|:------------------------------------------------| :-----------------------:|
+| --cells-fontDefault                                    | Font family of :host                            | sans-serif               |
+| --cells-select-item                                    | Mixin applied to :host                          | {}                       |
+| --cells-select-item-color                              | Color of :host                                  | var(--bbva-500, #666)    |
+| --cells-select-item-border-top-color                   | Color of separator between items                | #E5E5E5                  |
+| --cells-select-item-lastchild                          | Mixin applied to :host's last-child             | {}                       |
+| --cells-select-item-sibling                            | Mixin applied to sibling of :host               | {}                       |
+| --cells-select-item-inheader                           | Mixin applied to :host in context of .header    | {}                       |
+| --cells-select-item-inheader-icon                      | Mixin applied to .icon in context of .header    | {}                       |
+| --cells-select-item-inheader-title                     | Mixin applied to .title in context of .header   | {}                       |
+| --cells-select-item-selected                           | Mixin applied to [selected] :host               | {}                       |
+| --cells-select-item-selected-color                     | Color of [selected] :host                       | var(--bbva-600, #121212) |
+| --cells-select-item-selected-before                    | Mixin applied to ::before of [selected] :host   | {}                       |
+| --cells-select-item-selected-before-bg-color           | Background color of ::before's [selected] :host | transparent              |
+| --cells-select-item-selected-before-border-top-color   | Border top color of ::before's [selected] :host | var(--bbva-200, #e9e9e9) |
+| --cells-select-item-hover                              | Mixin applied to :hover                         | {}                       |
+| --cells-select-item-hover-before                       | Mixin applied to :hover:before                  | {}                       |
+| --cells-select-item-focused                            | Mixin applied to focused :host                  | {}                       |
+| --cells-select-item-title                              | Mixin applied to .title                         | {}                       |
+| --cells-select-item-description-color                  | Color of description                            | #434A58                  |
+| --cells-select-item-description                        | Mixin applied to .description                   | {}                       |
+| --cells-select-icon                                    | Mixin applied to .icon                          | {}                       |
+| --cells-select-custom                                  | Mixin applied to .custom                        | {}                       |
+| --cells-select-custom-title                            | Mixin applied to custom title                   | {}                       |
+| --cells-select-custom-icon                             | Mixin applied to custom icon                    | {}                       |
+
+@demo demo/index.html
+-->
+<dom-module id="cells-select-item">
+  <template>
+    <style include="cells-select-item-styles cells-select-item-shared-styles"></style>
+    <div class="title">
+      <template is="dom-if" if="[[data.icon]]">
+        <iron-icon id="icon" icon="[[data.icon]]" class="icon"></iron-icon>
+      </template>
+      <span class="label">[[data.title]]</span>
+    </div>
+    <template is="dom-if" if="[[data.description]]">
+      <div class="description">
+        <template is="dom-if" if="[[_isNumber]]">
+          <cells-atom-amount amount-sizes="amount--m" amount="[[data.description]]" currency-code="[[data.currencyCode]]">
+          </cells-atom-amount>
+        </template>
+        <template is="dom-if" if="[[!_isNumber]]">
+          <span>[[data.description]]</span>
+        </template>
+      </div>
+    </template>
+  </template>
+  <script src="cells-select-item.js"></script>
+</dom-module>

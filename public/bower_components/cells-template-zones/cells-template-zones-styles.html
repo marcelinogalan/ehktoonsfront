@@ -1,0 +1,120 @@
+<dom-module id="cells-template-zones-styles">
+  <template>
+    <style>
+       :host {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 0;
+        overflow: hidden;
+        --app__footer-height: 50px;
+        @apply --cells-template-zones;
+      }
+
+       :host([state="active"]) {
+        z-index: 1;
+        @apply --cells-template-zones-state-active;
+      }
+
+      .app-container,
+      .app__section {
+        height: 100%;
+        @apply --cells-template-zones-containersection;
+      }
+
+      .app__section {
+        overflow: hidden;
+        position: relative;
+        z-index: var(--app__section-zindex, 0);
+        background-color: var(--app__section-bg, #fff);
+        @apply --cells-template-zones-section;
+      }
+
+      .app__header {
+        z-index: var(--app__header-zindex, 0);
+        position: relative;
+        @apply --cells-template-zones-header;
+      }
+
+
+      .static-zones {
+        position: var(--static-zones-position, relative);
+        min-height: var(--static-zones-height, 100%);
+        box-sizing: border-box;
+        @apply --cells-template-animation-static-zones;
+      }
+
+      .static-zones>* {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: var(--app-static-zones-children-bottom, 0);
+        box-sizing: border-box;
+        @apply --cells-template-animation-static-zones-children;
+      }
+
+      [app-scroller-container] {
+        box-sizing: border-box;
+        -webkit-overflow-scrolling: touch;
+        overflow-x: hidden;
+        overflow-y: auto;
+        padding-top: var(--app-scroller-container-padding-top, 0);
+        padding-bottom: var(--app-scroller-container-padding-bottom, 0);
+        background-color: var(--cells-template-animation-scroller-container-bgc, #fff);
+        @apply --cells-template-static-app-scroller-container;
+      }
+
+      [app-scroller-container]:not([state])+[app-scroller-container]:not([state]) {
+        display: none;
+      }
+
+       :host([has-footer]) .app__footer {
+        position: absolute;
+        will-change: transform;
+        bottom: 0;
+        width: 100%;
+        height: var(--app-footer-height, --app__footer-height);
+        @apply --cells-template-paper-drawer-panel-footer;
+      }
+
+       :host(.footer-fixed) [app-scroller-container] {
+        padding-bottom: var(--app__footer-height);
+      }
+
+       :host([floating-header]) #app__header {
+        height: 0;
+        color: white;
+      }
+
+       :host(.overflow-initial) [app-scroller-container] {
+        -webkit-overflow-scrolling: auto;
+      }
+
+      .app__complementary {
+        height: 100%;
+        width: var(--app__complementary-width, 100%);
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        z-index: var(--app__complementary-zindex, 0);
+        @apply --cells-template-zones-complementary;
+      }
+
+      .app__overlay {
+        z-index: var(--app__overlay-zindex, 0);
+        @apply --cells-template-zones-overlay;
+      }
+
+      .app__transactional {
+        z-index: var(--app__transactional-zindex, 0);
+        position: absolute;
+        bottom: 0;
+        @apply --cells-template-zones-transactional;
+      }
+    </style>
+  </template>
+</dom-module>

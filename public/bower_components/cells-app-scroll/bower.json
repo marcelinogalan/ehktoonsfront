@@ -1,0 +1,53 @@
+{
+  "name": "cells-app-scroll",
+  "description": "A header bar with scrolling behavior",
+  "version": "10.1.0",
+  "keywords": [
+    "web-components",
+    "polymer",
+    "layout",
+    "responsive"
+  ],
+  "main": "cells-app-scroll.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#1.9 - 2",
+    "iron-resizable-behavior": "PolymerElements/iron-resizable-behavior#1 - 2"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#1 - 2",
+    "web-component-tester": "^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0",
+    "cells-demo-helper": "9 - 10",
+    "cells-component-app-header": "9 - 10",
+    "cells-product-item-list": "9 - 10",
+    "coronita-icons": "9 - 10",
+    "cells-coronita-theme": "^11.0.0"
+  },
+  "resolutions": {
+    "webcomponentsjs": "^1.0.0",
+    "hydrolysis": "^1.18",
+    "iron-icon": "1 - 2"
+  },
+  "variants": {
+    "1.x": {
+      "dependencies": {
+        "polymer": "Polymer/polymer#^1.9.0"
+      },
+      "devDependencies": {
+        "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+        "web-component-tester": "Polymer/web-component-tester#^4.0.0",
+        "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7",
+        "cells-demo-helper": "^9.0.0",
+        "cells-component-app-header": "^9.0.0",
+        "cells-product-item-list": "^9.0.0",
+        "coronita-icons": "^9.0.0",
+        "cells-coronita-theme": "^11.0.0"
+      },
+      "resolutions": {
+        "webcomponentsjs": "^0.7",
+        "hydrolysis": "^1.18",
+        "iron-icon": "^1.0.0"
+      }
+    }
+  }
+}

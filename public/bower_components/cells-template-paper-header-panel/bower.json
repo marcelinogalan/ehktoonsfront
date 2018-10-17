@@ -1,0 +1,53 @@
+{
+  "name": "cells-template-paper-header-panel",
+  "version": "10.0.3",
+  "description": "Basic template of a column with a paper-header-panel component",
+  "keywords": [
+    "template",
+    "one column",
+    "paper-header-panel",
+    "spec"
+  ],
+  "ignore": [],
+  "dependencies": {
+    "polymer": "Polymer/polymer#1.9 - 2",
+    "cells-template-animation-behavior": "^10.0.0",
+    "paper-header-panel": "PolymerElements/paper-header-panel#1 - 2"
+  },
+  "devDependencies": {
+    "cells-sass": "^2.0.0",
+    "iron-component-page": "PolymerElements/iron-component-page#1 - 2",
+    "web-component-tester": "^6.0.0",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#1 - 2",
+    "cells-demo-helper": "^10.0.0",
+    "paper-tabs": "PolymerElements/paper-tabs#1 - 2",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
+  },
+  "main": [
+    "cells-template-paper-header-panel.html"
+  ],
+  "resolutions": {
+    "webcomponentsjs": "^1.0.0"
+  },
+  "variants": {
+    "1.x": {
+      "dependencies": {
+        "polymer": "Polymer/polymer#^1.9.0",
+        "cells-template-animation-behavior": "^10.0.0",
+        "paper-header-panel": "PolymerElements/paper-header-panel#^1.0.0"
+      },
+      "devDependencies": {
+        "cells-sass": "^2.0.0",
+        "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+        "web-component-tester": "^4.0.0",
+        "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+        "cells-demo-helper": "^10.0.0",
+        "paper-tabs": "PolymerElements/paper-tabs#^1.0.0",
+        "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7"
+      },
+      "resolutions": {
+        "webcomponentsjs": "^0.7"
+      }
+    }
+  }
+}

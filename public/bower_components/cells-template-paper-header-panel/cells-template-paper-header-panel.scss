@@ -1,0 +1,97 @@
+@import "bower_components/cells-sass/main";
+:host {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 0;
+	--app__footer-height: 60px;
+	@apply --cells-template-paper-header-panel;
+}
+
+:host([state="active"]) {
+	z-index: 1;
+}
+
+.app-container,
+.app__section {
+	width: 100%;
+}
+
+.app__header {
+	background: var(--cells-template-paper-header-panel-app__header-background, transparent);
+	box-sizing: border-box;
+	@apply --cells-template-paper-header-panel-app__header;
+}
+
+:host([gradient-transparent]) {
+	.app__header {
+		position: absolute;
+		width: 100%;
+		z-index: 1;
+		background: linear-gradient(to top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+		@apply --cells-template-paper-header-panel-app__header--gradient-transparent;
+	}
+	.app__main {
+		padding-top: var(--cells-template-paper-header-panel-app__main-padding-gradient-transparent, 55px);
+	}
+}
+
+.app-container {
+	@apply --cells-template-paper-header-panel-app__container;
+}
+
+.app__section {
+	@apply --cells-template-paper-header-panel-app__section;
+}
+
+.app__main {
+	width: 100%;
+	max-width: var(--cells-template-paper-header-panel-app__main-max-width, 768px);
+	margin: 0 auto;
+	padding: var(--cells-template-paper-header-panel-app__main-padding, 0);
+	box-sizing: border-box;
+	@apply --cells-template-paper-header-panel-app__main;
+}
+
+.app__footer {
+	width: 100%;
+	box-sizing: border-box;
+	@apply --cells-template-paper-header-panel-app__footer;
+}
+
+:host([has-footer]) {
+  --paper-header-panel-container: unquote("{
+    padding-bottom: var(--app__footer-height); 
+  }");
+}
+
+:host([has-footer]) {
+	--paper-scroll-header-container: unquote("{
+		padding-bottom: var(--app__footer-height);
+	}");
+}
+
+.app__overlay {
+	z-index: var(--app__overlay-zindex, 0);
+	@apply --cells-template-paper-drawer-panel-overlay;
+}
+
+
+/* mode waterfall-tall paper-header-panel */
+
+:host([mode="waterfall-tall"]) {
+	.paper-header {
+		height: var(--cells-template-paper-header-panel-paper-header-height, 100px);
+		transition: height 0.2s;
+		&.tall {
+			height: 150px;
+		}
+		&.medium-tall {
+			height: 100px;
+		}
+		@apply --cells-template-paper-header-panel-paper-header-waterfall-tall;
+	}
+}

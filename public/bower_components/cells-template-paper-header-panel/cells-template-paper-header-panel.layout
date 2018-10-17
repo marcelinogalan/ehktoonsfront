@@ -1,0 +1,32 @@
+{
+  "layout": {
+    "columns": [{
+      "expand": 100,
+      "rows": [{
+        "expand": 14,
+        "zones": [{
+          "expand": 100,
+          "zone": "app__header"
+        }]
+      }, {
+        "expand": 72,
+        "zones": [{
+          "expand": 100,
+          "zone": "app__main"
+        }]
+      }, {
+        "expand": 14,
+        "zones": [{
+          "expand": 100,
+          "zone": "app__footer"
+        }]
+      }, {
+        "expand": 100,
+        "zones": [{
+          "expand": 100,
+          "zone": "app__overlay"
+        }]
+      }]
+    }]
+  }
+}

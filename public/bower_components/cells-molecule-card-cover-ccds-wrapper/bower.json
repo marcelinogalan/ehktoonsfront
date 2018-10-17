@@ -1,0 +1,51 @@
+{
+  "name": "cells-molecule-card-cover-ccds-wrapper",
+  "version": "10.0.3",
+  "description": "Wraps 'cells-molecule-card-cover' and sets its image source URL in the 'BBVA CCDS' way, taking screen pixel ratio into account",
+  "keywords": [
+    "cover",
+    "image",
+    "overlay",
+    "layer",
+    "icon",
+    "ratio"
+  ],
+  "ignore": [],
+  "dependencies": {
+    "cells-image-ccds-behavior": "9 - 10",
+    "cells-molecule-card-cover": "9 - 10",
+    "polymer": "Polymer/polymer#1.9 - 2"
+  },
+  "devDependencies": {
+    "cells-sass": "^2.0.0",
+    "iron-component-page": "PolymerElements/iron-component-page#1 - 2",
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0",
+    "cells-demo-helper": "9 - 10",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
+  },
+  "main": [
+    "cells-molecule-card-cover-ccds-wrapper.html"
+  ],
+  "resolutions": {
+    "webcomponentsjs": "^1.0.0"
+  },
+  "variants": {
+    "1.x": {
+      "dependencies": {
+        "cells-image-ccds-behavior": "^9.0.0",
+        "cells-molecule-card-cover": "^9.0.0",
+        "polymer": "Polymer/polymer#^1.9.0"
+      },
+      "devDependencies": {
+        "cells-sass": "^2.0.0",
+        "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+        "web-component-tester": "Polymer/web-component-tester#^4.0.0",
+        "cells-demo-helper": "^9.0.0",
+        "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7"
+      },
+      "resolutions": {
+        "webcomponentsjs": "^0.7"
+      }
+    }
+  }
+}
