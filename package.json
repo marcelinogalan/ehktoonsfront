@@ -1,0 +1,10 @@
+{
+  "name": "01-HackaToons",
+  "version": "0.1.0",
+  "keywords": [
+    "cells-app"
+  ],
+  "dependencies": {
+    "cells-app-template": "^3.0.8"
+  }
+}

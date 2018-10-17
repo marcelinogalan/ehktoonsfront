@@ -1,0 +1,14 @@
+{
+  "composer": {
+    "appId": "01-HackaToons",
+    "version": "^1.0.10",
+    "bridge": {
+      "componentsPath": "./components/",
+      "composerEndpoint": "./composerMocks/",
+      "deployEndpoint": ""
+    },
+    "bowerExclusions": ["web-component-tester","polymer","cells-polymer-bridge"],
+    "elementsExclusions": [],
+    "build": {}
+  }
+}

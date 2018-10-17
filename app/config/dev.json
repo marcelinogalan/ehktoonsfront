@@ -1,0 +1,44 @@
+{
+  "cells_properties": {
+    "deployEndpoint": "",
+    "i18nPath": "locales/",
+    "componentsPath": "./components/",
+    "composerEndpoint": "./composerMocks/",
+    "appId": "",
+    "debug": true,
+    "mocks": true,
+    "coreCache": true,
+    "routerLog": false,
+    "cordovaScript": "cordova.js",
+    "prplLevel": 1,
+    "initialBundle": [
+      "login.json"
+    ],
+    "transpile": true,
+    "transpileExclude": [
+      "cells-rxjs",
+      "webcomponentsjs",
+      "moment",
+      "d3",
+      "bgadp*",
+      "polymer*"
+    ]
+  },
+  "app_properties": {
+    "urlSRVLocalBack": "http://localhost:8001",
+    "urlSRVIntBack": "http://hackatoons.us-east-2.elasticbeanstalk.com",
+    "urlSRVProd1Back": "",
+    "urlSRVProd2Back": "",
+    "urlSRVLocalFront": "localhost",
+    "urlSRVIntFront": "",
+    "urlSRVProd1Front": "",
+    "urlSRVProd2Front": "",
+    "hackServices": {
+      "login": {
+        "url": "https://ei-arqaso.igrupobbva:8050/accounts/v0/contracts-transfer-data",
+        "urlMock": "json/mock/createCreditAccount.json",
+        "mock": true
+      }
+    }
+  }
+}
