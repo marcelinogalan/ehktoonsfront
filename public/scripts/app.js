@@ -7,7 +7,8 @@
       'staffHome': '/staff',
       'levelsHome': '/levels',
       'locationHome': '/location',
-      'ninjasBucket': '/ninjasBucket'
+      'ninjasBucket': '/ninjasBucket',
+      'assess': '/assess'
     }
   });
 

@@ -1,0 +1,52 @@
+<link rel="import" href="../my-styles.html">
+<link rel="import" href="../my-table-styles.html">
+<link rel="import" href="../../bower_components/cells-select/cells-select.html">
+<link rel="import" href="../../bower_components/cells-operations-list/cells-operations-list.html">
+<link rel="import" href="../../bower_components/coronita-icons/coronita-icons.html">
+<link rel="import" href="../../bower_components/cells-coronita-base-theme/cells-coronita-base-theme.html">
+<link rel="import" href="components/cells-button-toolbar/cells-button-toolbar.html">
+<link rel="import" href="../../bower_components/cells-molecule-input/cells-molecule-input.html">
+
+<dom-module id="assess-view">
+  <template>
+    <style include="cells-icon-message-styles"></style>
+    <style include="my-table-styles"></style>
+
+    <cells-select id="piSelect" options="[[pisOptionsArray]]" placeholder="Selecciona el PI"></cells-select>
+    <cells-select id="ninjaSelect" options="[[ninjaOptionsArray]]" placeholder="Selecciona el Ninja"></cells-select>
+    <cells-select id="proyectoSelect" options="[[proyectoOptionsArray]]" placeholder="Selecciona el Proyecto"></cells-select>
+    <cells-select id="skillSelect" options="[[skillsOptionsArray]]" placeholder="Selecciona el Skill a valorar"></cells-select>
+    <cells-select id="cinturonSelect" options="[[cinturonOptionsArray]]" placeholder="Selecciona el Cinturon a valorar"></cells-select>
+    <cells-molecule-input id="assessmentNote" name="assessmentNote" label="Comentarios" type="text" value="{{assessmentNote}}"></cells-molecule-input>
+    <cells-st-button id="randomBtn" on-click="_selectLevel" class="full">
+      <button>Valorar</button>
+    </cells-st-button>
+
+    <table class="table">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">Pi</th>
+        <th scope="col">Ninja</th>
+        <th scope="col">Proyecto</th>
+        <th scope="col">Skill</th>
+        <th scope="col">Cinturon</th>
+        <th scope="col">Nota</th>
+      </tr>
+      </thead>
+      <tbody>
+      <template is="dom-repeat" items="{{assessmentOptionsArray}}">
+        <tr>
+          <td>[[item.pi]]</td>
+          <td>[[item.ninja]]</td>
+          <td>[[item.proyecto]]</td>
+          <td>[[item.skill]]</td>
+          <td>[[item.cinturon]]</td>
+          <td>[[item.nota]]</td>
+        </tr>
+      </template>
+      </tbody>
+    </table>
+
+  </template>
+  <script src="assess-view.js"></script>
+</dom-module>
