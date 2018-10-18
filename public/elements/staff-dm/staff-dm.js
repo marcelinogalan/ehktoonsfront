@@ -36,14 +36,19 @@
     }
 
 
-    doNinjaRequest() {
-      const path = '';
-      this._doRequest(path);
+    doNinjaRequest(evt) {
+      var levelDiscipline = evt.levels;
+      var country = evt.country;
+      console.log('Datos seleccionados para la consulta: ');
+      console.log(levelDiscipline);
+      console.log(country);
+      this._doRequest(levelDiscipline, country);
     }
 
 
     _onRequestOk(evt) {
       const data = evt.detail;
+
       //console.log(evt);
       //console.log(data);
 
@@ -56,10 +61,30 @@
         }));
     }
 
-    _doRequest(e) {
+    _doRequest(levelDiscipline, country) {
+
+      var disciplineItem = {
+        disciplinesEnum: '',
+        puntuacion: ''
+      };
+
+      var paramDisciplineList = [];
+      levelDiscipline.map(function (item, index) {
+
+        disciplineItem = {
+          disciplinesEnum: item.parentId,
+          puntuacion: item.selectedId
+        };
+
+        paramDisciplineList.push(disciplineItem);
+      });
 
       this.AWSHost = this.getBehaviors().getHost();
-      //this.$.loginDP.body = {username: userId , password: password};
+
+      this.$.staffDP.body = {
+        disciplines: paramDisciplineList,
+        countryEnum: country
+      };
       this.$.staffDP.generateRequest();
     }
 

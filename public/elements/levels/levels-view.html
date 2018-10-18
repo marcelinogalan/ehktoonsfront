@@ -14,25 +14,53 @@
     <style include="cells-icon-message-styles"></style>
     <style include="my-styles"></style>
     <bbva-header title="Elige Cinturón"></bbva-header>
-    <cells-operations-list operations="[[items]]"
-                           icon-size="26"
-                           grid-columns="5"
-                           on-operation-click="_demoEvent"
-                           id="operationsList">
+    <div style="
+    float: left;
+    background-color: #203859;
+    padding: 27px;
+    border-radius: 20px;
+    border: 1px solid #203859;
+    margin-left: 35%;
+    box-shadow: 6px 6px 5px 0px rgba(0,0,0,0.75);
+">
 
-    </cells-operations-list>
+      <div style="
+    float: left;
+    box-shadow: wheat;
+    width: 100%;
+    border-radius: 20px;
+">
+        <cells-operations-list operations="[[items]]"
+                               icon-size="26"
+                               grid-columns="5"
+                               on-operation-click="_demoEvent"
+                               id="operationsList">
 
-    <cells-selector-list-accordion id="proyectsList2"
-                                   class="style-scope"
-                                   data="{{selectorData}}"
-                                   selected-data="{{selectedData}}"
-                                   arrow-icon="banking:F12">
-    </cells-selector-list-accordion>
+        </cells-operations-list>
+        <div style="
+    float: left;
+    width: 100%;
+">
+          <cells-selector-list-accordion id="proyectsList2"
+                                         class="style-scope"
+                                         data="{{selectorData}}"
+                                         selected-data="{{selectedData}}"
+                                         arrow-icon="banking:F12">
+          </cells-selector-list-accordion>
+        </div>
+      </div>
+      <div style="
+    float: left;
+    width: 100%;
+    height: 40px;
+    background-color: #004481;
+">
 
+        <cells-st-button id="randomBtn" on-click="_selectLevel" class="full">
+          <button>Siguiente</button>
+        </cells-st-button>
+      </div>
 
-    <cells-st-button id="randomBtn" on-click="_selectLevel" class="full">
-      <button>Siguiente</button>
-    </cells-st-button>
   </template>
   <script src="levels-view.js"></script>
 </dom-module>

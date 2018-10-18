@@ -48,7 +48,8 @@
         {
           detail:
             {
-              disciplines: this.disciplines
+              disciplines: this.disciplines,
+              levels: this.levelDiscipline
             }
         }));
     }
@@ -66,39 +67,39 @@
           'name': item.label,
           'items': [
             {
-              'id': 'blanco',
+              'id': 'white',
               'url': 'cells/mobile_apps/cells-native/labs/',
-              'name': 'Centurión Blanco'
+              'name': 'Cinturón Blanco'
             },
             {
-              'id': 'amarillo',
+              'id': 'yellow',
               'url': 'cells/mobile_apps/cells-native/labs/',
-              'name': 'Centurión Amarillo'
+              'name': 'Cinturón Amarillo'
             },
             {
-              'id': 'naranja',
+              'id': 'orange',
               'url': 'cells/mobile_apps/cells-native/labs/',
-              'name': 'Centurión Naranja'
+              'name': 'Cinturón Naranja'
             },
             {
-              'id': 'verde',
+              'id': 'green',
               'url': 'cells/mobile_apps/cells-native/labs/',
-              'name': 'Centurión Verde'
+              'name': 'Cinturón Verde'
             },
             {
-              'id': 'azul',
+              'id': 'blue',
               'url': 'cells/mobile_apps/cells-native/labs/',
-              'name': 'Centurión Azul'
+              'name': 'Cinturón Azul'
             },
             {
-              'id': 'marron',
+              'id': 'brown',
               'url': 'cells/mobile_apps/cells-native/poc/',
-              'name': 'Centurión Marrón'
+              'name': 'Cinturón Marrón'
             },
             {
-              'id': 'negro',
+              'id': 'black',
               'url': 'cells/mobile_apps/cells-native/poc/',
-              'name': 'Centurión Negro'
+              'name': 'Cinturón Negro'
             }]
         };
         levelItemList.push(levelItem);

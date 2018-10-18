@@ -1,27 +1,49 @@
 <link rel="import" href="../my-styles.html">
 <link rel="import" href="../my-table-styles.html">
+<link rel="import" href="../bbva-header/bbva-header.html">
 <link rel="import" href="../../bower_components/cells-select/cells-select.html">
 <link rel="import" href="../../bower_components/cells-operations-list/cells-operations-list.html">
 <link rel="import" href="../../bower_components/coronita-icons/coronita-icons.html">
 <link rel="import" href="../../bower_components/cells-coronita-base-theme/cells-coronita-base-theme.html">
-<link rel="import" href="components/cells-button-toolbar/cells-button-toolbar.html">
 <link rel="import" href="../../bower_components/cells-molecule-input/cells-molecule-input.html">
 
 <dom-module id="assess-view">
   <template>
     <style include="cells-icon-message-styles"></style>
     <style include="my-table-styles"></style>
+    <bbva-header title="Valora los Ninjas"></bbva-header>
 
-    <cells-select id="piSelect" options="[[pisOptionsArray]]" placeholder="Selecciona el PI"></cells-select>
-    <cells-select id="ninjaSelect" options="[[ninjaOptionsArray]]" placeholder="Selecciona el Ninja"></cells-select>
-    <cells-select id="proyectoSelect" options="[[proyectoOptionsArray]]" placeholder="Selecciona el Proyecto"></cells-select>
-    <cells-select id="skillSelect" options="[[skillsOptionsArray]]" placeholder="Selecciona el Skill a valorar"></cells-select>
-    <cells-select id="cinturonSelect" options="[[cinturonOptionsArray]]" placeholder="Selecciona el Cinturon a valorar"></cells-select>
-    <cells-molecule-input id="assessmentNote" name="assessmentNote" label="Comentarios" type="text" value="{{assessmentNote}}"></cells-molecule-input>
-    <cells-st-button id="randomBtn" on-click="_selectLevel" class="full">
-      <button>Valorar</button>
-    </cells-st-button>
+    <div style="
+    float: left;
+    background-color: #203859;
+    padding: 27px;
+    border-radius: 20px;
+    margin-bottom: 48px;
+    border: 1px solid #203859;
+    margin-left: 40%;
+    box-shadow: 6px 6px 5px 0px rgba(0,0,0,0.75);">
 
+      <div style="
+        float: left;
+        box-shadow: wheat;
+        width: 100%;
+        border-radius: 20px;">
+
+        <cells-select id="piSelect" options="[[pisOptionsArray]]" placeholder="Selecciona el PI"></cells-select>
+        <cells-select id="ninjaSelect" options="[[ninjaOptionsArray]]" placeholder="Selecciona el Ninja"></cells-select>
+        <cells-select id="proyectoSelect" options="[[proyectoOptionsArray]]" placeholder="Selecciona el Proyecto"></cells-select>
+        <cells-select id="skillSelect" options="[[skillsOptionsArray]]" placeholder="Selecciona el Skill a valorar"></cells-select>
+        <cells-select id="cinturonSelect" options="[[cinturonOptionsArray]]" placeholder="Selecciona el Cinturon a valorar"></cells-select>
+        <cells-molecule-input id="assessmentNote" name="assessmentNote" label="Comentarios" type="text" value="{{assessmentNote}}"></cells-molecule-input>
+
+
+        <cells-st-button id="randomBtn" on-click="_selectLevel" class="full" style="
+                                                                    float: left;
+                                                                    width: 87%;">
+          <button>Valorar</button>
+        </cells-st-button>
+      </div>
+    </div>
     <table class="table">
       <thead class="thead-dark">
       <tr>

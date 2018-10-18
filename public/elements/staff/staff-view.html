@@ -13,15 +13,45 @@
     <style include="my-styles"></style>
     <bbva-header title="Selecciona Disciplina"></bbva-header>
 
-    <cells-operations-list operations="[[items]]"
-                           icon-size="26"
-                           grid-columns="5"
-                           on-operation-click="_demoEvent">
+    <div style="
+    float: left;
+    background-color: #203859;
+    padding: 27px;
+    border-radius: 20px;
+    border: 1px solid #203859;
+    margin-left: 20%;
+    box-shadow: 6px 6px 5px 0px rgba(0,0,0,0.75);
+">
 
-    </cells-operations-list>
-    <cells-st-button id="randomBtn" on-click="_selectLevel" class="full">
-      <button>Siguiente</button>
-    </cells-st-button>
+      <div style="
+    float: left;
+    box-shadow: wheat;
+    width: 100%;
+    border-radius: 20px;
+">
+
+        <cells-operations-list operations="[[items]]"
+                               icon-size="26"
+                               grid-columns="5"
+                               on-operation-click="_demoEvent">
+
+        </cells-operations-list>
+      </div>
+      <div style="
+    float: left;
+    width: 100%;
+    height: 40px;
+    background-color: #004481;
+">
+        <cells-st-button id="randomBtn" on-click="_selectLevel" class="full">
+          <button>Siguiente</button>
+        </cells-st-button>
+      </div>
+
+    </div>
+
+
+
   </template>
   <script src="staff-view.js"></script>
 </dom-module>

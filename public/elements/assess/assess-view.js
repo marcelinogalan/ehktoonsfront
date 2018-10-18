@@ -59,7 +59,7 @@
                 {'title':'Verde', 'id': 4},
                 {'title':'Azul', 'id': 5},
                 {'title':'Marrón', 'id': 6},
-                {'title':'Negro', 'id': 7}                
+                {'title':'Negro', 'id': 7}
           ]
         },
         assessmentOptionsArray : {
@@ -96,10 +96,10 @@
 
         var myJsonString = JSON.stringify(lista);
         console.log(myJsonString);
-  
+
         var json = myJsonString;
         var obj = JSON.parse(json);
-  
+
         this.assessmentOptionsArray = obj;
 
         this.$.piSelect.resetSelection();
@@ -112,7 +112,6 @@
 
     ready(){
       super.ready();
-
 
     }
 

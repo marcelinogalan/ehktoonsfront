@@ -14,6 +14,11 @@
           type: String,
           value: ''
         },
+        levelDiscipline: {
+          type: Array,
+          value: [],
+          notify: true
+        },
         items: {
           type: Array,
           value: [],
@@ -29,44 +34,60 @@
             {
               title: 'España',
               description: '',
+              id: 'ESP'
             },
             {
-              title: 'Colombia',
+              title: 'Argentina',
               description: '',
+              id: 'ARG'
             },
             {
-              title: 'Francia',
+              title: 'CIB',
               description: '',
+              id: 'CIB'
             },
             {
-              title: 'Portugal',
+              title: 'Holding',
               description: '',
+              id: 'HLD'
             },
             {
-              title: 'Dinamarca',
+              title: 'México',
               description: '',
+              id: 'MEX'
             },
             {
-              title: 'Suecia',
+              title: 'Perú',
               description: '',
+              id: 'PER'
             },
             {
-              title: 'Italia',
+              title: 'Uruguay',
               description: '',
+              id: 'URU'
+            },
+            {
+              title: 'Estados Unidos',
+              description: '',
+              id: 'USA'
+            },
+            {
+              title: 'Paraguay',
+              description: '',
+              id: 'PAR'
+            },
+            {
+              title: 'Otros',
+              description: '',
+              id: 'URUGUAY_OTH'
             }
           ],
           notify: true
-        }
+        },
+        country: String
       };
     }
 
-
-    _doRequest(e) {
-
-      this.AWSHost = this.getBehaviors().getHost();
-      //this.$.loginDP.body = {username: userId , password: password};
-      this.$.staffDM.generateRequest();
-    }
 
     _searchNinjas() {
       // BE AWARE! If you are not sending a payload, you can use 'Event' instead of 'CustomEvent'
@@ -75,16 +96,24 @@
         {
           detail:
             {
-              disciplines: this.disciplines
+              disciplines: this.disciplines,
+              levels: this.levelDiscipline,
+              country: this.country
             }
         }));
     }
 
     getDisciplines(obj) {
-      console.log('param');
+      console.log('param disciplines');
       console.log(obj);
       this.items = obj.disciplines;
+      this.levelDiscipline = obj.levels;
 
+    }
+
+    selectLocation(evt) {
+      this.country = evt.id;
+      console.log(this.country);
     }
 
 

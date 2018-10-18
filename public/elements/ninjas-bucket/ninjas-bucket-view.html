@@ -26,14 +26,18 @@
       <thead class="thead-dark">
       <tr>
         <th scope="col">Nombre</th>
-        <th scope="col">Categoría</th>
-        <th scope="col">Learning</th>
-        <th scope="col">Experience</th>
-        <th scope="col">Community</th>
-        <th scope="col">Teamwork</th>
-        <th scope="col">Communication</th>
-        <th scope="col">Cinturón</th>
-        <th scope="col">Perfil</th>
+        <th scope="col">Agile</th>
+        <th scope="col">Data</th>
+        <th scope="col">PaaS</th>
+        <th scope="col">COMMaaS</th>
+        <th scope="col">SEMaaS</th>
+        <th scope="col">Security</th>
+        <th scope="col">Processes</th>
+        <th scope="col">Channes - Branches</th>
+        <th scope="col">Channels - Web</th>
+        <th scope="col">Mobile</th>
+        <th scope="col">Cinturón Ninja</th>
+        <th scope="col">Perfil Ninja</th>
         <th scope="col">Lo quiero</th>
       </tr>
       </thead>
@@ -41,14 +45,40 @@
       <template is="dom-repeat" items="{{ninjas}}">
         <tr>
           <th scope="row">[[item.nombre]]
+          </th>
+          <td>
+            <cells-atom-icon icon="ninja:cinto-[[item.ninjaData.agile]]" class="icon-size-24"></cells-atom-icon>
           </td>
-          <td>[[item.ninjaData.category]]</td>
-          <td>[[item.ninjaData.learning]]</td>
-          <td>[[item.ninjaData.experience]]</td>
-          <td>[[item.ninjaData.community]]</td>
-          <td>[[item.ninjaData.teamwork]]</td>
-          <td>[[item.ninjaData.communication]]</td>
-          <td>[[item.ninjaData.belt]]</td>
+          <td>
+            <cells-atom-icon icon="ninja:cinto-[[item.ninjaData.data]]" class="icon-size-24"></cells-atom-icon>
+          </td>
+          <td>
+            <cells-atom-icon icon="ninja:cinto-[[item.ninjaData.paaS]]" class="icon-size-24"></cells-atom-icon>
+          </td>
+          <td>
+            <cells-atom-icon icon="ninja:cinto-[[item.ninjaData.commaaS]]" class="icon-size-24"></cells-atom-icon>
+          </td>
+          <td>
+            <cells-atom-icon icon="ninja:cinto-[[item.ninjaData.semaaS]]" class="icon-size-24"></cells-atom-icon>
+          </td>
+          <td>
+            <cells-atom-icon icon="ninja:cinto-[[item.ninjaData.security]]" class="icon-size-24"></cells-atom-icon>
+          </td>
+          <td>
+            <cells-atom-icon icon="ninja:cinto-[[item.ninjaData.processes]]" class="icon-size-24"></cells-atom-icon>
+          </td>
+          <td>
+            <cells-atom-icon icon="ninja:cinto-[[item.ninjaData.branches]]" class="icon-size-24"></cells-atom-icon>
+          </td>
+          <td>
+            <cells-atom-icon icon="ninja:cinto-[[item.ninjaData.web]]" class="icon-size-24"></cells-atom-icon>
+          </td>
+          <td>
+            <cells-atom-icon icon="ninja:cinto-[[item.ninjaData.mobile]]" class="icon-size-24"></cells-atom-icon>
+          </td>
+          <td>
+            <cells-atom-icon icon="ninja:cinto-[[item.ninjaData.belt]]" class="icon-size-24"></cells-atom-icon>
+          </td>
 
           <td>
             <a href="https://www.theninjaproject.bbva/profile/search?q=marcelino.galan@bbva.com" target="_blank">

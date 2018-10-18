@@ -21,6 +21,20 @@
         }));
     }
 
+    goHome(){
+
+    }
+
+    _goAssess() {
+      this.dispatchEvent(new CustomEvent('event-assess-home',
+        {
+          detail:
+            {
+              disciplines: ''
+            }
+        }));
+    }
+
     bookTeam() {
       alert('Equipo reservado');
     }

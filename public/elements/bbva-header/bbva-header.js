@@ -14,6 +14,15 @@
       };
     }
 
+    _goHome() {
+      this.dispatchEvent(new CustomEvent('go-home',
+        {
+          detail:
+            {
+              disciplines: ''
+            }
+        }));
+    }
 
 
   }
