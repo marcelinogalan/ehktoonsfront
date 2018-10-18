@@ -1,0 +1,71 @@
+<link rel="import" href="../my-styles.html">
+<link rel="import" href="../my-table-styles.html">
+<link rel="import" href="../bbva-header/bbva-header.html">
+<link rel="import" href="../progress-bar-steps/progress-bar-steps.html">
+<link rel="import" href="../../bower_components/cells-st-button/cells-st-button.html">
+<link rel="import" href="../../bower_components/cells-operations-list/cells-operations-list.html">
+<link rel="import" href="../../bower_components/coronita-icons/coronita-icons.html">
+<link rel="import" href="../../bower_components/cells-coronita-base-theme/cells-coronita-base-theme.html">
+<link rel="import" href="../../bower_components/cells-select/cells-select.html">
+<link rel="import" href="../../bower_components/cells-switch/cells-switch.html">
+<link rel="import" href="../../bower_components/cells-atom-icon/cells-atom-icon.html">
+
+<dom-module id="ninjas-bucket-view">
+  <template>
+    <style include="my-table-styles"></style>
+    <bbva-header title="NINJAS"></bbva-header>
+    <cells-operations-list operations="[[items]]"
+                           icon-size="26"
+                           grid-columns="5"
+                           on-operation-click="_demoEvent">
+
+    </cells-operations-list>
+
+
+    <table class="table">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Categoría</th>
+        <th scope="col">Learning</th>
+        <th scope="col">Experience</th>
+        <th scope="col">Community</th>
+        <th scope="col">Teamwork</th>
+        <th scope="col">Communication</th>
+        <th scope="col">Cinturón</th>
+        <th scope="col">Perfil</th>
+        <th scope="col">Lo quiero</th>
+      </tr>
+      </thead>
+      <tbody>
+      <template is="dom-repeat" items="{{ninjas}}">
+        <tr>
+          <th scope="row">[[item.nombre]]
+          </td>
+          <td>[[item.ninjaData.category]]</td>
+          <td>[[item.ninjaData.learning]]</td>
+          <td>[[item.ninjaData.experience]]</td>
+          <td>[[item.ninjaData.community]]</td>
+          <td>[[item.ninjaData.teamwork]]</td>
+          <td>[[item.ninjaData.communication]]</td>
+          <td>[[item.ninjaData.belt]]</td>
+
+          <td>
+            <a href="https://www.theninjaproject.bbva/profile/search?q=marcelino.galan@bbva.com" target="_blank">
+              <cells-atom-icon icon="coronita:international" class="icon-size-24"></cells-atom-icon>
+            </a></td>
+          <td>
+            <cells-switch></cells-switch>
+          </td>
+        </tr>
+      </template>
+      </tbody>
+    </table>
+
+
+    <cells-st-button id="randomBtn" on-click="_bookTeam" class="full">
+      <button>Reservar Equipo</button>
+    </cells-st-button>
+  </template>
+  <script src="ninjas-bucket-view.js"></script>
+</dom-module>

@@ -135,6 +135,13 @@ You can invoke the `validate` method on the component to run a validation of the
 ```html
 <cells-molecule-input label="Your email" type="email" auto-validate error-message="You must enter a valid email" error-icon="coronita:alert"></cells-molecule-input>
 ```
+### extra content for error message
+
+`error-content` slot can be used to add extra content to error message like icons, text and image etc..
+
+```html
+<slot name="error-content"></slot>
+```
 
 The component will use the `iron-input` own validation based on input type. You can use the the `allowed-value` attribute to pass a specific regular expression instead. The value must match the regular expression to validate correctly.
 
@@ -301,10 +308,8 @@ Custom property                                        | Description            
 
       <template is="dom-if" if="[[errorIcon]]">
         <div class="icon error-icon" hidden$="[[!invalid]]">
-
           <iron-icon icon$="[[errorIcon]]" style$="width: [[iconSize]]px; height: [[iconSize]]px;" aria-hidden="true">
           </iron-icon>
-
         </div>
       </template>
 
@@ -314,7 +319,10 @@ Custom property                                        | Description            
       <div class="error-message-wrapper">
         <iron-icon hidden$="[[!errorMessageIcon]]" icon$="[[errorMessageIcon]]" style$="width: [[iconSize]]px; height: [[iconSize]]px;"
           aria-hidden="true"></iron-icon>
-        <iron-label for="input" class="error" hidden$="[[!errorMessage]]">[[t(errorMessage)]]</iron-label>
+        <iron-label for="input" class="error" hidden$="[[!errorMessage]]">
+          [[t(errorMessage)]]
+          <slot name="error-content"></slot>
+        </iron-label>
       </div>
     </template>
 

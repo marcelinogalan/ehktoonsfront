@@ -139,6 +139,14 @@ You can invoke the `validate` method on the component to run a validation of the
 `error-message` attribute can be used to show an error message when input value is invalid. You can also use the `error-icon` attribute to pass an icon to show when the input is invalid or/and
 `error-message-icon` attribute to show an icon before message error label when the input is invalid and icon exist.
 
+### extra content for error message
+
+`error-content` slot can be used to add extra content to error message like icons, text and image etc..
+
+```html
+<slot name="error-content"></slot> 
+```
+
 ```html
 <cells-molecule-input label="Your email" type="email" auto-validate error-message="You must enter a valid email" error-icon="coronita:alert"></cells-molecule-input>
 ```
@@ -165,7 +173,7 @@ Also, setting the `required` attribute to true will make the input validation to
 
 ```html
 <cells-molecule-input label="Your username" type="text" max-length="10" prevent-invalid-input allowed-chars="[a-zA-Z0-9]"></cells-molecule-input>
-```
+``` 
 
 ### Custom pattern and mask
 

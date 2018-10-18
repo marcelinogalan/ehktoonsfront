@@ -1,0 +1,38 @@
+<link rel="import" href="../ninja-styles.html">
+<dom-module id="progress-bar-steps">
+  <template>
+    <style include="ninja-styles"></style>
+    <div>
+      <ui-progress-bar >
+        <div class="row margin-top-two steps-container">
+          <div class="col-xs-12">
+            <div class="row"> <!-- ngRepeat: step in $ctrl.stepList -->
+              <div ng-repeat="step in $ctrl.stepList" class="ng-scope">
+                <div class="bg-dad text-uppercase ng-binding col-xs-4 bold">
+                  <span class="bg ng-binding" ng-class="$ctrl.getActivatedBg($index);">1</span> SELECCIONA DISCIPLINA
+                </div> <!-- ngIf: $ctrl.noEsUltimo($index); -->
+                <div ng-if="$ctrl.noEsUltimo($index);" class="col-xs-1 curva ng-scope"></div><!-- end ngIf: $ctrl.noEsUltimo($index); --> </div><!-- end ngRepeat: step in $ctrl.stepList -->
+              <div ng-repeat="step in $ctrl.stepList" class="ng-scope">
+                <div class="bg-dad text-uppercase ng-binding col-xs-4 no-activated" ng-class="$ctrl.getStepClass($index)">
+                  <span class="bg ng-binding no-activated-bg" ng-class="$ctrl.getActivatedBg($index);">2</span>
+                  ELIGE EL NIVEL
+                </div> <!-- ngIf: $ctrl.noEsUltimo($index); -->
+                <div ng-if="$ctrl.noEsUltimo($index);" class="col-xs-1 curva ng-scope"></div><!-- end ngIf: $ctrl.noEsUltimo($index); --> </div><!-- end ngRepeat: step in $ctrl.stepList -->
+              <div ng-repeat="step in $ctrl.stepList" class="ng-scope">
+                <div class="bg-dad text-uppercase ng-binding no-activated" ng-class="$ctrl.getStepClass($index)">
+                  <span class="bg ng-binding no-activated-bg" ng-class="$ctrl.getActivatedBg($index);">3</span>
+                  ESCOGE LOCALIZACIÓN
+                </div> <!-- ngIf: $ctrl.noEsUltimo($index); --> </div><!-- end ngRepeat: step in $ctrl.stepList --> </div>
+            <div class="row">
+              <div ng-class="$ctrl.getSliderOne();" class="col-xs-4 slider-active-pon"></div>
+              <div ng-class="$ctrl.getSliderTwo();" class="col-xs-8 slider-no-active-pon"></div>
+            </div>
+          </div>
+        </div>
+      </ui-progress-bar>
+    </div>
+  </template>
+
+  <script src="progress-bar-steps.js"></script>
+
+</dom-module>

@@ -1,6 +1,6 @@
 {
   "name": "cells-molecule-input",
-  "version": "11.7.1",
+  "version": "11.8.0",
   "description": "A customized input component with a floating label and an optional icon",
   "keywords": [
     "molecule",

@@ -2,7 +2,7 @@
 
 # cells-atom-icon
 
-![Certificated](https://img.shields.io/badge/certificated-yes-brightgreen.svg)
+![Certificated](https://img.shields.io/badge/certificated-yes-brightgreen.svg) ![Polymer 2.x](https://img.shields.io/badge/Polymer-2.x-green.svg)
 
 [Demo of component in Cells Catalog](https://bbva-ether-cellscatalogs.appspot.com/?view=demo#/component/cells-atom-icon)
 
@@ -51,6 +51,5 @@ The following custom properties and mixins are available for styling:
 
 | Custom property | Description     | Default        |
 |:----------------|:----------------| :--------------|
-| --cells-atom-icon           | icon mixin                    | {}             |
 | --cells-atom-icon-size      | icon size (width and height)  | 1rem (16px)    |
 | --cells-atom-icon-iron-icon | inner iron icon               | {}             |

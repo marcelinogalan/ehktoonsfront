@@ -1,0 +1,31 @@
+<link rel="import" href="../my-styles.html">
+<link rel="import" href="../bbva-header/bbva-header.html">
+<link rel="import" href="../progress-bar-steps/progress-bar-steps.html">
+<link rel="import" href="../../bower_components/cells-st-button/cells-st-button.html">
+<link rel="import" href="../../bower_components/cells-operations-list/cells-operations-list.html">
+<link rel="import" href="../../bower_components/coronita-icons/coronita-icons.html">
+<link rel="import" href="../../bower_components/cells-coronita-base-theme/cells-coronita-base-theme.html">
+<link rel="import" href="../../bower_components/cells-select/cells-select.html">
+
+<dom-module id="location-view">
+  <template>
+    <bbva-header title="Escoge País"></bbva-header>
+    <cells-operations-list operations="[[items]]"
+                           icon-size="26"
+                           grid-columns="5"
+                           on-operation-click="_demoEvent">
+
+    </cells-operations-list>
+    <cells-select options="[[optionsCombo]]"
+                  id="no-description"
+                  label="País"
+                  right-icon="coronita:unfold"
+                  placeholder="Selecciona un país">
+
+    </cells-select>
+    <cells-st-button id="randomBtn" on-click="_searchNinjas" class="full">
+      <button>Buscar Ninjas</button>
+    </cells-st-button>
+  </template>
+  <script src="location-view.js"></script>
+</dom-module>

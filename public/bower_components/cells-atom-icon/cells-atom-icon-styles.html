@@ -1,12 +1,15 @@
 <dom-module id="cells-atom-icon-styles"><template><style>
 :host {
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
   display: inline-flex;
-  align-items: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   vertical-align: text-bottom;
   font-size: var(--cells-atom-icon-size, 1rem);
   width: 1em;
-  height: 1em;
-  @apply --cells-atom-icon; }
+  height: 1em; }
 
 :host([hidden]) {
   display: none; }

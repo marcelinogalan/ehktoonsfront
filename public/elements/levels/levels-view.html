@@ -1,0 +1,38 @@
+<link rel="import" href="../my-styles.html">
+<link rel="import" href="../ninja-icons/ninja-icons.html">
+<link rel="import" href="../bbva-header/bbva-header.html">
+<link rel="import" href="../progress-bar-steps/progress-bar-steps.html">
+<link rel="import" href="../../bower_components/cells-st-button/cells-st-button.html">
+<link rel="import" href="../../bower_components/cells-operations-list/cells-operations-list.html">
+<link rel="import" href="../../bower_components/coronita-icons/coronita-icons.html">
+<link rel="import" href="../../bower_components/cells-coronita-base-theme/cells-coronita-base-theme.html">
+<link rel="import" href="../../bower_components/cells-selector-list-accordion/cells-selector-list-accordion.html">
+<link rel="import" href="../../bower_components/banking-icons/banking-icons.html">
+
+<dom-module id="levels-view">
+  <template>
+    <style include="cells-icon-message-styles"></style>
+    <style include="my-styles"></style>
+    <bbva-header title="Elige Cinturón"></bbva-header>
+    <cells-operations-list operations="[[items]]"
+                           icon-size="26"
+                           grid-columns="5"
+                           on-operation-click="_demoEvent"
+                           id="operationsList">
+
+    </cells-operations-list>
+
+    <cells-selector-list-accordion id="proyectsList2"
+                                   class="style-scope"
+                                   data="{{selectorData}}"
+                                   selected-data="{{selectedData}}"
+                                   arrow-icon="banking:F12">
+    </cells-selector-list-accordion>
+
+
+    <cells-st-button id="randomBtn" on-click="_selectLevel" class="full">
+      <button>Siguiente</button>
+    </cells-st-button>
+  </template>
+  <script src="levels-view.js"></script>
+</dom-module>

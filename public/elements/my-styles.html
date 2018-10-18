@@ -1,6 +1,20 @@
 <dom-module id="my-styles">
   <template>
     <style>
+      .custom {
+        --cells-operations-list-list__link-color: red;
+      }
+
+      :host([layout="grid"]) .link__icon {
+        color: red;
+      }
+
+      cells-operations-listcells-operations-list {
+        --cells-operations-list-list-bg-color: {
+          background-color: red;
+        }
+      }
+
       cells-login-view {
         --cells-login-view-login-moveup-maximized-header: {
 

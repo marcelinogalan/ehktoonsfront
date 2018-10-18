@@ -7,7 +7,6 @@
   font-size: var(--cells-atom-icon-size, 1rem);
   width: 1em;
   height: 1em;
-  @apply --cells-atom-icon;
 }
 
 :host([hidden]){

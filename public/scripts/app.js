@@ -3,7 +3,11 @@
 
   window.CellsPolymer.start({
     routes: {
-      'login': '/'
+      'home': '/',
+      'staffHome': '/staff',
+      'levelsHome': '/levels',
+      'locationHome': '/location',
+      'ninjasBucket': '/ninjasBucket'
     }
   });
 
