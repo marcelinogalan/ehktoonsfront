@@ -1,0 +1,27 @@
+{
+  "name": "banking-icons",
+  "version": "12.0.0",
+  "description": "A set of icons for use with atom-icon and iron-icon",
+  "keywords": [
+    "icons",
+    "banking",
+    "iconset"
+  ],
+  "dependencies": {
+    "iron-icon": "PolymerElements/iron-icon#^2.0.0",
+    "iron-iconset-svg": "PolymerElements/iron-iconset-svg#^2.0.0",
+    "polymer": "Polymer/polymer#^2.0.0"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^2.0.0",
+    "demo-iconset": "^1.1.4",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
+  },
+  "main": [
+    "banking-icons.html"
+  ],
+  "ignore": [
+    "util",
+    "update-icons.sh"
+  ]
+}
