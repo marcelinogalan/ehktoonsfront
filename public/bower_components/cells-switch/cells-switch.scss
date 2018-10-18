@@ -1,0 +1,215 @@
+@import "bower_components/cells-sass/main";
+:host {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--cells-fontDefault, sans-serif);
+  outline: none;
+  --knob-size: var(--cells-switch-knob-size, 22);
+  --switch-width: var(--cells-switch-width, 38);
+  @apply --cells-switch;
+}
+
+.switcher {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  height: calc(var(--knob-size) * 1px);
+  width: calc(var(--switch-width) * 1px);
+  position: relative;
+  border-radius: calc(var(--knob-size) / 22 * 13px);
+  border: 1px solid transparent;
+  background-color: var(--cells-switch-switcher-bg-color-off, var(--bbva-500, #666666));
+  transition: background-color 200ms linear;
+  @apply --cells-switch-switcher;
+}
+
+.item {
+  width:50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @apply --cells-switch-items;
+
+  cells-atom-icon  {
+    justify-content: center;
+    @apply --cells-switch-icons;
+  }
+}
+
+.knob {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 50%;
+  width: calc(var(--knob-size) * 1px);
+  height: calc(var(--knob-size) * 1px);
+  transition: transform 200ms ease-in-out, background-color 195ms linear, box-shadow 200ms ease-in-out;
+  color: var(--cells-switch-knob-color-off, var(--bbva-white, #FFFFFF));
+  background-color: var(--cells-switch-knob-bg-color-off, var(--bbva-white, #FFFFFF));
+  @apply --cells-switch-knob;
+
+  cells-atom-icon {
+    transition: color 200ms linear;
+    transform: scale(calc(var(--knob-size) / 22));
+    color: var(--cells-switch-knob-icon-color-off, var(--bbva-green-medium, #388D4F));
+    @apply --cells-switch-knob-icon;
+  }
+}
+
+
+:host([dark-bg]) {
+  .switcher {
+    background-color: var(--cells-switch-dark-bg-switcher-bg-color-off, var(--bbva-white, #FFFFFF));
+  }
+  .knob {
+    background-color: var(--cells-switch-dark-bg-knob-bg-color-off, var(--bbva-500, #666666));
+  }
+}
+
+:host([with-icons]){
+  .switcher {
+    background-color: var(--cells-switch-with-icons-switcher-bg-color-off, var(--bbva-500, #666666));
+  }
+  .knob{
+    cells-atom-icon {
+      color: var(--cells-switch-with-icons-knob-icon-color-off, var(--bbva-500, #666666));
+    }
+  }
+}
+
+:host(:hover:not([disabled])){
+  .switcher {
+    background-color: var(--cells-switch-switcher-hover-bg-color-off, var(--bbva-600, #121212));
+  }
+  .knob {
+    background-color: var(--cells-switch-knob-hover-bg-color-off, var(--bbva-white, #FFFFFF));
+  }
+}
+
+:host(:hover:not([disabled])[dark-bg]){
+    .switcher {
+      background-color: var(--cells-switch-dark-bg-switcher-hover-bg-color-off, var(--bbva-white, #FFFFFF));
+    }
+    .knob {
+      background-color: var(--cells-switch-dark-bg-knob-hover-bg-color-off, var(--bbva-600, #121212));
+    }
+}
+
+:host(:hover:not([disabled])[with-icons]){
+  .switcher {
+    background-color: var(--cells-switch-with-icons-switcher-hover-bg-color-off, var(--bbva-500, #666666));
+  }
+  .knob {
+    cells-atom-icon {
+      color: var(--cells-switch-with-icons-knob-hover-icon-color-off, var(--bbva-green-medium, #388D4F));
+    }
+  }
+}
+
+
+:host(:focus:not([disabled])){
+  .knob {
+    box-shadow: 0px 0px 2px 2px var(--cells-switch-knob-focus-shadow-color-off, var(--bbva-core-sky-blue, #1464A5));
+  }
+}
+:host(:focus:not([disabled])[dark-bg]){
+  .knob {
+    box-shadow: 0px 0px 2px 2px var(--cells-switch-dark-bg-knob-focus-shadow-color-off, var(--bbva-core-sky-blue, #1464A5));
+  }
+}
+:host(:focus:not([disabled])[with-icons]){
+  .knob {
+    box-shadow: 0px 0px 2px 2px var(--cells-switch-with-icons-knob-focus-shadow-color-off, var(--bbva-core-sky-blue, #1464A5));
+  }
+}
+
+:host([disabled]){
+  opacity: var(--cells-switch-disabled-opacity, 0.3);
+  pointer-events: none;
+}
+
+:host([disabled]:focus){
+  .knob {
+    box-shadow: none;
+  }
+}
+
+:host([hidden]), [hidden] {
+  display: none !important;
+}
+
+:host([checked]){
+  .switcher {
+    background-color: var(--cells-switch-switcher-bg-color-on, var(--bbva-medium-blue, #1973B8));
+  }
+  .knob {
+    transform: translateX(calc((var(--switch-width) - var(--knob-size)) * 1px));
+    background-color: var(--cells-switch-knob-bg-color-on, var(--bbva-white, #FFFFFF));
+  }
+}
+
+:host([checked][with-icons]){
+  .switcher {
+    background-color: var(--cells-switch-with-icons-switcher-bg-color-on, var(--bbva-green-medium, #388D4F));
+  }
+  .knob{
+    cells-atom-icon {
+      color: var(--cells-switch-with-icons-knob-icon-color-on, var(--bbva-green-medium, #388D4F));
+    }
+  }
+}
+
+:host([checked][dark-bg]){
+  .switcher {
+    background-color: var(--cells-switch-dark-bg-switcher-bg-color-on, var(--bbva-white, #FFFFFF));
+  }
+  .knob {
+    background-color: var(--cells-switch-dark-bg-knob-bg-color-on, var(--bbva-medium-blue, #1973B8));
+  }
+}
+
+:host([checked]:hover){
+  .switcher {
+    background-color: var(--cells-switch-switcher-hover-bg-color-on, var(--bbva-core-blue, #004481));
+  }
+  .knob {
+    background-color: var(--cells-switch-knob-hover-bg-color-on, var(--bbva-white, #FFFFFF));
+  }
+}
+
+:host([checked]:hover[dark-bg]){
+  .switcher {
+    background-color: var(--cells-switch-dark-bg-switcher-hover-bg-color-on, var(--bbva-white, #FFFFFF));
+  }
+  .knob {
+    background-color: var(--cells-switch-dark-bg-knob-hover-bg-color-on, var(--bbva-core-blue, #004481));
+  }
+}
+
+:host([checked]:hover[with-icons]){
+  .switcher {
+    background-color: var(--cells-switch-with-icons-switcher-hover-bg-color-on, var(--bbva-green-medium, #388D4F));
+  }
+  .knob {
+    cells-atom-icon {
+      color: var(--cells-switch-with-icons-knob-hover-icon-color-on, var(--bbva-500, #666666));
+    }
+  }
+}
+
+:host([checked]:not([disabled]):focus){
+  .knob {
+    box-shadow: 0px 0px 2px 2px var(--cells-switch-knob-focus-shadow-color-on, var(--bbva-core-sky-blue, #1464A5));
+  }
+}
+:host([checked]:not([disabled]):focus[dark-bg]){
+  .knob {
+    box-shadow: 0px 0px 2px 2px var(--cells-switch-dark-bg-knob-focus-shadow-color-on, var(--bbva-dark-medium-blue, #1464A5));
+  }
+}
+:host([checked]:not([disabled]):focus[with-icons]){
+  .knob {
+    box-shadow: 0px 0px 2px 2px var(--cells-switch-with-icons-knob-focus-shadow-color-on, var(--bbva-core-blue-sky, #1464A5));
+  }
+}
